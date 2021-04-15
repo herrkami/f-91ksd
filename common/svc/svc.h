@@ -1,0 +1,18 @@
+#pragma once
+
+#include "util.h"
+#include "lcd.h"
+#include "main.h"
+#include "menu.h"
+#include "leds.h"
+#include "beep.h"
+#include "melody.h"
+#include "chro.h"
+#include "alarm.h"
+#include "countdown.h"
+#include "backlight.h"
+#include "init.h"
+#include "otp.h"
+#include "seconds_since_last_set.h"
+#include "rtc_adj.h"
+// #include "compass.h"

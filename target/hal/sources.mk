@@ -1,0 +1,20 @@
+SMAPS_C = hal/segmap.c
+GEN_SMAP = hal/gen_map.py
+
+SRC += hal/lcd.c \
+       hal/wdt.c \
+       hal/io.c \
+       hal/rtc.c \
+       hal/button.c \
+       hal/beepled.c \
+       hal/aux_timer.c \
+       hal/i2c.c \
+       hal/aes/aes256.c \
+       hal/crypto.c \
+       hal/debug.c \
+       $(SMAPS_C)
+	   # hal/mag3110.c \
+	   # hal/compass.c \
+
+$(SMAPS_C): %.c: %.map $(GEN_SMAP)
+	$(GEN_SMAP) $< > $@
