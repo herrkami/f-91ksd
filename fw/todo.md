@@ -1,20 +1,16 @@
 # TODOs
 
 ## Features
-- Remove compass ✓
-- Remove speed ✓
-- Remove IR stuff (if there??) ✓
-- Remove OTP
 - Restructure menus
 - Timers
     - Add Pomodoro/chaining mode (set follow up timers: -, 1, 2, etc)
-    - Add pause to timers
-    - Timers shouldn't reset after reaching 0 (bug)
-- Breathing app
-- Add club mode (blinky blinky)
+    - Add pause to timers (long press enter)
+- Add pulsar mode (blinky blinky)
     - BPM capture by button press
 - Alarms
-    - Only one alarm exists so far (bug)
+    - Add light as alarm signal
+- Breathing app
+- Remove OTP
 
 ## HAL
 - Add support for the other two LEDs (PJ.7, P7.2/T0.1) ✓
@@ -24,3 +20,13 @@
 ## Simulator
 - Add the other two LEDs to the simulator ✓
 - Make key bindings to streamline debugging
+
+## Desired menu structure
+
+### Main apps:
+- time
+- countdowns
+- alarms
+- stopwatch
+- pulsar
+- breathing

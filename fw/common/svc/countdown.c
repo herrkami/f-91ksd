@@ -6,7 +6,7 @@
 #include <string.h>
 #include "platform.h"
 
-#define N_COUNTDOWNS 12
+#define N_COUNTDOWNS 11
 
 typedef struct {
 	SVC_COUNTDOWN_COMMON
@@ -16,7 +16,7 @@ typedef struct {
 } svc_countdown_priv_t;
 
 static svc_countdown_priv_t SECTION_INFOMEM svc_countdowns[N_COUNTDOWNS] = {
-	{.h=0, .m=0, .s=5}
+	{.h=0, .m=10, .s=0}
 };
 
 #define NO_COUNTDOWN_PENDING 0xff
@@ -30,7 +30,22 @@ const uint8_t svc_countdowns_n = N_COUNTDOWNS;
 void svc_countdown_init(void) {
 	for(uint8_t i=0; i<svc_countdowns_n; i++) {
 		svc_countdowns[i].melody = svc_default_melody_get();
+		svc_countdowns[i].successor = SVC_COUNTDOWN_SUCCESSOR_NONE;
 	}
+	svc_countdown_set_time(0, 0, 1, 0);
+	svc_countdown_set_time(1, 0, 2, 0);
+	svc_countdown_set_time(2, 0, 3, 0);
+	svc_countdown_set_time(3, 0, 5, 0);
+	svc_countdown_set_time(4, 0, 10, 0);
+	svc_countdown_set_time(5, 0, 20, 0);
+	svc_countdown_set_time(6, 0, 30, 0);
+	svc_countdown_set_time(7, 0, 45, 0);
+	svc_countdown_set_time(8, 1, 0, 0);
+	svc_countdown_set_time(9, 1, 30, 0);
+	svc_countdown_set_time(10, 2, 0, 0);
+
+	// TEST
+	svc_countdowns[0].successor = 0;
 }
 
 void svc_countdown_get(uint8_t index, svc_countdown_t *out) {
@@ -91,6 +106,11 @@ void svc_countdown_process(void) {
 			if(svc_countdown_dec(&(svc_countdowns[i]))) {
 				svc_melody_play_repeat(svc_countdowns[i].melody, svc_melody_alarm_repetitions_get());
 				countdown_pending = i;
+
+				uint8_t successor = svc_countdowns[i].successor;
+				if(successor != SVC_COUNTDOWN_SUCCESSOR_NONE) {
+					svc_countdown_start(successor);
+				}
 			}
 		}
 	}

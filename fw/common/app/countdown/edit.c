@@ -54,7 +54,7 @@ static void time_set(uint8_t dig, int8_t dir, void *user_data) {
 }
 
 static void time_draw(svc_menu_state_t *state, svc_menu_item_unknown_t *item, void *user_data) {
-	svc_lcd_puts(8,"ti");
+	svc_lcd_puts(8,"cd");
 	svc_countdown_t cd;
 	svc_countdown_get(PRIV(app_current)->countdown_current, &cd);
 	svc_lcd_puti(0, 2, cd.h);
@@ -81,9 +81,11 @@ static void start_stop_draw(svc_menu_state_t *state, svc_menu_item_unknown_t *it
 	svc_lcd_puti(6, 2, PRIV(app_current)->countdown_current);
 	if(cd.state == SVC_COUNTDOWN_STATE_STOP) {
 		svc_lcd_puts(0, "start");
+		hal_lcd_dig_set_blink_mask(0b11111);
 	}
 	else {
 		svc_lcd_puts(0, "stop");
+		hal_lcd_dig_set_blink_mask(0b1111);
 	}
 }
 
@@ -145,7 +147,7 @@ static const svc_menu_t menu = {
 	.n_items = ARRAY_SIZE(menu_items),
 	.items = (void*)menu_items,
 	.handler_exit = menu_exit,
-	.header = "ce",
+	.header = "cd",
 	.header_pos = 8
 };
 

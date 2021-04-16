@@ -1,6 +1,8 @@
 #pragma once
 #include <stdint.h>
 
+#define SVC_COUNTDOWN_SUCCESSOR_NONE 0xff
+
 typedef enum {
 	SVC_COUNTDOWN_STATE_STOP = 0,
 	SVC_COUNTDOWN_STATE_RUN
@@ -12,6 +14,7 @@ typedef enum {
 	int8_t s; \
 	svc_countdown_state_t state; \
 	uint8_t melody; \
+	uint8_t successor; \
 
 typedef struct {
 	SVC_COUNTDOWN_COMMON

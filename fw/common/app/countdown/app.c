@@ -13,16 +13,16 @@ static void main(uint8_t view, const app_t *app, svc_main_proc_event_t event) {
 	// 	app_exit();
 	// }
 	// else if(event & SVC_MAIN_PROC_EVENT_KEY_DOWN_LONG) {
-	else if(event & SVC_MAIN_PROC_EVENT_KEY_ENTER) {
-		svc_countdown_t cd;
-		svc_countdown_get(PRIV(app_current)->countdown_current, &cd);
-		if(cd.state == SVC_COUNTDOWN_STATE_STOP) {
-			svc_countdown_start(PRIV(app_current)->countdown_current);
-		}
-		else {
-			svc_countdown_stop(PRIV(app_current)->countdown_current);
-		}
-	}
+	// // else if(event & SVC_MAIN_PROC_EVENT_KEY_ENTER) {
+	// 	svc_countdown_t cd;
+	// 	svc_countdown_get(PRIV(app_current)->countdown_current, &cd);
+	// 	if(cd.state == SVC_COUNTDOWN_STATE_STOP) {
+	// 		svc_countdown_start(PRIV(app_current)->countdown_current);
+	// 	}
+	// 	else {
+	// 		svc_countdown_stop(PRIV(app_current)->countdown_current);
+	// 	}
+	// }
 
 	svc_countdown_t cd;
 	svc_countdown_get(PRIV(app)->countdown_current, &cd);
@@ -38,8 +38,8 @@ static void main(uint8_t view, const app_t *app, svc_main_proc_event_t event) {
 		svc_lcd_puts(8, "cd");
 	}
 	svc_lcd_puti(6, 2, PRIV(app)->countdown_current);
-	// if(event & SVC_MAIN_PROC_EVENT_KEY_ENTER) {
-	if(event & SVC_MAIN_PROC_EVENT_KEY_DOWN_LONG) {
+	if(event & SVC_MAIN_PROC_EVENT_KEY_ENTER) {
+	// if(event & SVC_MAIN_PROC_EVENT_KEY_DOWN_LONG) {
 		app_set_view(app, 1);
 	}
 }
