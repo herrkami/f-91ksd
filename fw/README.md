@@ -1,21 +1,6 @@
-F-91KSD is an alternative version of [pluto](https://github.com/carrotIndustries/pluto) -- "a programmable digital watch that re-uses case and LCD
-panel of the Casio® F-91W."
-This repository in particular, contains the firmware.
-For the hardware side of things and a more information, see the
-[hardware repo](https://github.com/herrkami/f-91ksd).
-This document is incomplete as it only covers the most important aspects of the firmware, the rest is
-left as an exercise to the reader.
-
-# Features
-- Displays time in decimal/binary/hexadecimal base
-- Multiple alarms
-- Multiple countdown timers
-- Uses RTTTL ringtones for alarm sound
-- Stopwatch
-- Generation of time-based one-time passwords according to RFC 6238 (WIP)
-- Menu-driven interface
-- Useless customisation (Key beep frequency, etc.)
-- greater than 1 year battery life (estimate based on current consumption)
+#F-91KSD Firmware
+The F-91KSD firmware is based on the [pluto firmware](https://github.com/carrotIndustries/pluto-fw).
+Even the following README is partially borrowed.
 
 ## Assisted calibration
 Aside from being a cool nerd gadget pluto's main purpose is accurately
@@ -200,8 +185,9 @@ $ make program
 You may have to modify the Makefile to suit your particular programmer.
 
 # Credits
-Thanks go to [sh-ow](https://github.com/sh-ow) for implementing parts
-of the MSP430 HAL.
+Without previous work by [carrotIndustries](https://github.com/carrotIndustries/) and [sh-ow](https://github.com/sh-ow) this project wouldn't exist.
+Most of the software components is their work.
+
 
 # Included third-party software
 - [mbedtls](https://tls.mbed.org/) SHA-1 for use in HMAC
@@ -209,6 +195,3 @@ of the MSP430 HAL.
   peripheral driver
 - [liboath](http://www.nongnu.org/oath-toolkit/liboath-api/liboath-oath.html)
   for TOTP generation
-- [Example of bit-banging the I²C Master protocol](https://en.wikipedia.org/wiki/I%C2%B2C#Example_of_bit-banging_the_I.C2.B2C_Master_protocol) No idea why this ended up in Wikipedia. However, it's one of the
- better soft I²C master implementations out there.
-- [XY vector to integer degree fast algorithm](http://www.romanblack.com/integer_degree.htm) for heading calculation
