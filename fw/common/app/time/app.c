@@ -245,7 +245,7 @@ static void adjh_enter(void *ud) {
 
 static const svc_menu_item_text_t menu_item_adj = {
 	.type = SVC_MENU_ITEM_T_TEXT,
-	.text = " adj",
+	.text = "zone",
 	.handler = adjh_enter
 };
 
