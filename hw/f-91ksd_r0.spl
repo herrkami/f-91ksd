@@ -1,0 +1,36 @@
+Partlist[0]: f-91ksd_r0.sch
+
+Capacitors:
+
+    1x C:0603: 100n                         C2
+    2x C:0603: 22p                          C3 C4
+    1x C:0603: 4u7                          C1
+
+
+Resistors:
+
+    3x R:0603: 100                          R3 R4 R5
+    1x R:0603: 10k                          R2
+    1x R:0603: 47k                          R1
+
+
+Integrated Circuits, Oscillators:
+
+    1x MSP430FR6972 (QFN64-9X9)             IC1
+
+
+Transistors, Diodes:
+
+    2x  (LED:0603)                          LED3 LED4
+    2x  (LED:CHIPLED_0805)                  LED1 LED2
+    1x BC847C (T:SOT23-BEC)                 T1
+
+
+Rest:
+
+    1x PCB:F91W: F91W                       PCB_1
+    2x TP:TP07SQ: TPTP07SQ                  TP1 TP2
+    2x TP:TP11SQ: TPTP11SQ                  TP3 TP4
+
+Total number of parts: 20  (20)
+Number of positions:   13

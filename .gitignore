@@ -40,3 +40,8 @@
 # emacs
 .clang_complete
 Makefile2
+
+# Eagle
+*.b#*
+*.s#*
+hw/gerber/*
