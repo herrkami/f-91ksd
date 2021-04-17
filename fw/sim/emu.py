@@ -213,11 +213,29 @@ class Handler :
 		Gtk.main_quit()
 
 
+def key_press(widget, event):
+	print("Key press on widget: ", widget)
+	print("          Modifiers: ", event.state)
+	print("      Key val, name: ", event.keyval, Gdk.keyval_name(event.keyval))
+	key = Gdk.keyval_name(event.keyval)
+	if key == 'I':
+			outsock.send(b"LU")
+	if key == 'i':
+			outsock.send(b"KU")
+	if key == 'K':
+			outsock.send(b"LD")
+	if key == 'k':
+			outsock.send(b"KD")
+	if key == 'L':
+			outsock.send(b"LE")
+	if key == 'l':
+			outsock.send(b"KE")
 
 with open("display.json", "r") as fi :
 	display = Display(json.load(fi))
 	builder.get_object("display_box").pack_start(display, True, True, 0)
-	display.connect("key", lambda w,z: outsock.send_string("K"+z))
+	# display.connect("key", lambda w,z: outsock.send_string("K"+z))
+	window.connect("key-press-event", key_press)
 builder.connect_signals(Handler())
 window.show_all()
 

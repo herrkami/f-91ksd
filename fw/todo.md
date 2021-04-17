@@ -18,10 +18,6 @@
 - Repair the PWM bug (P1.0/TA0.1 is PWM-capable, not PJ.1)
 - Execute LED service routine in 16 Hz button polling interrupt instead of AUX timer
 
-## Simulator
-- Add the other two LEDs to the simulator ✓
-- Make key bindings to streamline debugging
-
 ## Desired menu structure
 
 ### Main apps:
