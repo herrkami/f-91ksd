@@ -38,7 +38,9 @@ static void time_set(uint8_t dig, int8_t dir, void *user_data) {
 }
 
 static void time_draw(svc_menu_state_t *state, svc_menu_item_unknown_t *item, void *user_data) {
-	svc_lcd_puts(8,"ti");
+	svc_lcd_puts(8,"al");
+	hal_lcd_dig_set_blink(8, 1);
+	hal_lcd_dig_set_blink(9, 1);
 	svc_alarm_t al;
 	svc_alarm_get(PRIV(app_current)->alarm_current, &al);
 	svc_lcd_puti(0, 2, al.h);
@@ -54,7 +56,7 @@ static void draw_current(svc_menu_state_t *state, svc_menu_item_unknown_t *item,
 static const svc_menu_item_adj_t menu_item_time = {
 	.type = SVC_MENU_ITEM_T_ADJ,
 	.text = "",
-	.header = "ti",
+	.header = "al",
 	.digits = 4,
 	.handler_get = time_get,
 	.handler_set = time_set,
@@ -169,7 +171,7 @@ static const svc_menu_t menu = {
 	.n_items = ARRAY_SIZE(menu_items),
 	.items = (void*)menu_items,
 	.handler_exit = menu_exit,
-	.header = "ae",
+	.header = "al",
 	.header_pos = 8
 };
 

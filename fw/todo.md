@@ -1,11 +1,15 @@
 # TODOs
 
 ## Features
+- Time
+    - Seconds should not be settable. Instead clicking on seconds should reset them to 0 like in the original Casio
 - Restructure menus
+    - Move Play app to config menu
+    - Add config menu by long up press
+    - Indicate which menu we are in with blinking top header
+    - Long enter press in main view of any app should always redirect to time
 - Timers
     - Add pause to timers (long press enter)
-- Melody
-    - Implement "--" for silent alarms
 - Add pulsar mode (blinky blinky)
     - BPM capture by button press
 - Alarms

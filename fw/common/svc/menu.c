@@ -57,6 +57,8 @@ void svc_menu_run(const svc_menu_t *menu, svc_menu_state_t *state, svc_main_proc
 
 		if(menu->header) {
 			svc_lcd_puts(menu->header_pos, menu->header);
+			hal_lcd_dig_set_blink(menu->header_pos, 1);
+			hal_lcd_dig_set_blink(menu->header_pos+1, 1);
 		}
 
 		switch(it_u->type) {
@@ -93,6 +95,8 @@ void svc_menu_run(const svc_menu_t *menu, svc_menu_state_t *state, svc_main_proc
 		}
 
 		svc_lcd_puts(8, it->header);
+		hal_lcd_dig_set_blink(8, 1);
+		hal_lcd_dig_set_blink(9, 1);
 		if(event & SVC_MAIN_PROC_EVENT_KEY_UP) {
 			svc_lcd_blink_disable();
 			it->handler_set(it->digits-state->adj_digit-1, 1, it->user_data);
@@ -114,7 +118,8 @@ void svc_menu_run(const svc_menu_t *menu, svc_menu_state_t *state, svc_main_proc
 			INC_MOD(state->adj_digit, it->digits);
 		}
 		if(state->adj_digit < it->digits) {
-			hal_lcd_dig_set_blink_mask(1<<state->adj_digit);
+			// hal_lcd_dig_set_blink_mask(1<<state->adj_digit);
+			hal_lcd_dig_set_blink(state->adj_digit, 1);
 		}
 	}
 }

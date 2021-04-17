@@ -43,7 +43,7 @@ static const svc_menu_item_adj_t menu_item_distance = {
 };
 
 static void time_draw(svc_menu_state_t *state, svc_menu_item_unknown_t *item, void *user_data) {
-	svc_lcd_puts(8, "ti");
+	svc_lcd_puts(8, "al");
 	svc_chro_t ch;
 	svc_chro_get(1, &ch);
 	svc_chro_state_t st = svc_chro_get_state(1);

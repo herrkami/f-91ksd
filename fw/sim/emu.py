@@ -214,9 +214,6 @@ class Handler :
 
 
 def key_press(widget, event):
-	print("Key press on widget: ", widget)
-	print("          Modifiers: ", event.state)
-	print("      Key val, name: ", event.keyval, Gdk.keyval_name(event.keyval))
 	key = Gdk.keyval_name(event.keyval)
 	if key == 'I':
 			outsock.send(b"LU")
@@ -237,6 +234,7 @@ with open("display.json", "r") as fi :
 	# display.connect("key", lambda w,z: outsock.send_string("K"+z))
 	window.connect("key-press-event", key_press)
 builder.connect_signals(Handler())
+window.set_default_size(500, 200)
 window.show_all()
 
 ctx = zmq.Context()
