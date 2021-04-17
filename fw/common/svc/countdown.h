@@ -1,7 +1,8 @@
 #pragma once
 #include <stdint.h>
 
-#define SVC_COUNTDOWN_SUCCESSOR_NONE 0xff
+#define SVC_COUNTDOWN_NR 11
+#define SVC_COUNTDOWN_SUCCESSOR_NONE (SVC_COUNTDOWN_NR)
 
 typedef enum {
 	SVC_COUNTDOWN_STATE_STOP = 0,
@@ -32,4 +33,5 @@ uint8_t svc_countdown_get_n_running(void);
 uint8_t svc_countdown_get_pending(void);
 void svc_countdown_clear_pending(void);
 void svc_countdown_set_melody(uint8_t index, uint8_t melody);
+void svc_countdown_set_successor(uint8_t index, uint8_t successor);
 void svc_countdown_draw_popup(void);

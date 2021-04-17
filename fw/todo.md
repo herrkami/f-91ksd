@@ -3,8 +3,9 @@
 ## Features
 - Restructure menus
 - Timers
-    - Add Pomodoro/chaining mode (set follow up timers: -, 1, 2, etc)
     - Add pause to timers (long press enter)
+- Melody
+    - Implement "--" for silent alarms
 - Add pulsar mode (blinky blinky)
     - BPM capture by button press
 - Alarms

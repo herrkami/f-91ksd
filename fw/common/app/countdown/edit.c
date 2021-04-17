@@ -74,6 +74,49 @@ static const svc_menu_item_adj_t menu_item_time = {
 	.handler_draw = time_draw,
 };
 
+// Successor menu
+
+static uint8_t successor_get(void *ud) {
+	svc_countdown_t cd;
+	svc_countdown_get(PRIV(app_current)->countdown_current, &cd);
+	return cd.successor;
+}
+
+static void successor_set(uint8_t choice, void *ud) {
+	svc_countdown_t cd;
+	svc_countdown_get(PRIV(app_current)->countdown_current, &cd);
+	cd.successor = choice;
+	svc_countdown_set_successor(PRIV(app_current)->countdown_current, cd.successor);
+}
+
+static void successor_draw(svc_menu_state_t *state, svc_menu_item_unknown_t *item, void *user_data) {
+	svc_lcd_puts(8,"cd");
+	svc_countdown_t cd;
+	svc_countdown_get(PRIV(app_current)->countdown_current, &cd);
+	svc_lcd_puts(0, "next");
+	if(cd.successor != SVC_COUNTDOWN_SUCCESSOR_NONE) {
+		svc_lcd_puti(4, 2, cd.successor);
+	}
+	else {
+		svc_lcd_putsn(4, 2, "--");
+	}
+	// hal_lcd_seg_set(HAL_LCD_SEG_COLON, 1);
+	svc_lcd_puti(6, 2, PRIV(app_current)->countdown_current);
+};
+
+static svc_menu_item_choice_t menu_item_successor = {
+	.type = SVC_MENU_ITEM_T_CHOICE,
+	.text = "next",
+	.choice_pos = 4,
+	.n_choices = SVC_COUNTDOWN_NR + 1,
+	.choices = {""},
+	.handler_get = successor_get,
+	.handler_set = successor_set,
+	.handler_draw = successor_draw,
+};
+
+// Start/stop menu
+
 static void start_stop_draw(svc_menu_state_t *state, svc_menu_item_unknown_t *item, void *user_data) {
 	svc_lcd_puts(8,"cd");
 	svc_countdown_t cd;
@@ -109,6 +152,8 @@ static const svc_menu_item_text_t menu_item_start_stop = {
 	.handler_draw = start_stop_draw,
 };
 
+// Melody menu
+
 static void melody_set(uint8_t choice, void *ud) {
 	svc_countdown_set_melody(PRIV(app_current)->countdown_current, choice);
 }
@@ -140,7 +185,8 @@ static svc_menu_item_choice_t menu_item_melody = {
 static const svc_menu_item_unknown_t *menu_items[] = {
 	(void*)&menu_item_start_stop,
 	(void*)&menu_item_time,
-	(void*)&menu_item_melody
+	(void*)&menu_item_melody,
+	(void*)&menu_item_successor
 };
 
 static const svc_menu_t menu = {

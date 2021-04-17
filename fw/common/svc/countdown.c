@@ -6,8 +6,6 @@
 #include <string.h>
 #include "platform.h"
 
-#define N_COUNTDOWNS 11
-
 typedef struct {
 	SVC_COUNTDOWN_COMMON
 	int8_t sh;
@@ -15,9 +13,7 @@ typedef struct {
 	int8_t ss;
 } svc_countdown_priv_t;
 
-static svc_countdown_priv_t SECTION_INFOMEM svc_countdowns[N_COUNTDOWNS] = {
-	{.h=0, .m=10, .s=0}
-};
+static svc_countdown_priv_t SECTION_INFOMEM svc_countdowns[SVC_COUNTDOWN_NR];
 
 #define NO_COUNTDOWN_PENDING 0xff
 
@@ -25,7 +21,7 @@ static uint8_t countdown_pending = NO_COUNTDOWN_PENDING;
 
 static uint8_t countdowns_running = 0;
 
-const uint8_t svc_countdowns_n = N_COUNTDOWNS;
+const uint8_t svc_countdowns_n = SVC_COUNTDOWN_NR;
 
 void svc_countdown_init(void) {
 	for(uint8_t i=0; i<svc_countdowns_n; i++) {
@@ -45,7 +41,7 @@ void svc_countdown_init(void) {
 	svc_countdown_set_time(10, 2, 0, 0);
 
 	// TEST
-	svc_countdowns[0].successor = 0;
+	// svc_countdowns[0].successor = 0;
 }
 
 void svc_countdown_get(uint8_t index, svc_countdown_t *out) {
@@ -143,4 +139,8 @@ void svc_countdown_clear_pending(void) {
 
 void svc_countdown_set_melody(uint8_t index, uint8_t melody) {
 	svc_countdowns[index].melody = melody;
+}
+
+void svc_countdown_set_successor(uint8_t index, uint8_t successor) {
+	svc_countdowns[index].successor = successor;
 }
