@@ -9,9 +9,10 @@ static void main(uint8_t view, const app_t *app, svc_main_proc_event_t event) {
 		// DEC_MOD(PRIV(app)->countdown_current, svc_countdowns_n);
 		app_launch(&app_app_alarm);
 	}
-	// else if(event & SVC_MAIN_PROC_EVENT_KEY_ENTER_LONG) {
-	// 	app_exit();
-	// }
+	else if(event & SVC_MAIN_PROC_EVENT_KEY_ENTER_LONG) {
+		// Pause/play timer
+		svc_countdown_play_pause(PRIV(app)->countdown_current);
+	}
 	// else if(event & SVC_MAIN_PROC_EVENT_KEY_DOWN_LONG) {
 	// // else if(event & SVC_MAIN_PROC_EVENT_KEY_ENTER) {
 	// 	svc_countdown_t cd;
@@ -33,6 +34,10 @@ static void main(uint8_t view, const app_t *app, svc_main_proc_event_t event) {
 	hal_lcd_seg_set_blink(HAL_LCD_SEG_COLON, cd.state == SVC_COUNTDOWN_STATE_RUN);
 	if(cd.state == SVC_COUNTDOWN_STATE_RUN) {
 		svc_lcd_puts(8, "ru");
+	}
+	else if(cd.state == SVC_COUNTDOWN_STATE_PAUSE) {
+		svc_lcd_puts(8, "ru");
+		hal_lcd_dig_set_blink_mask(0b11<<8);
 	}
 	else {
 		svc_lcd_puts(8, "cd");

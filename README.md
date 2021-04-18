@@ -11,6 +11,8 @@ Its hardware and firmware are heavily based on the brilliant
 - Stopwatch
 - Three bright LEDs for better readability, blinkiness, and silent alarms
 - RTTTL ringtones for alarm sounds
+- A breathing app to calm you down
+- Club mode: tap button to measure BPMs and define LED animation 
 - Generation of time-based one-time passwords according to RFC 6238 (WIP)
 - Menu-driven interface
 - Extensive customisation (key beep frequency and duration, etc.)

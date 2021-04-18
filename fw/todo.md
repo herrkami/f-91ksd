@@ -9,7 +9,7 @@
     - Indicate which menu we are in with blinking top header
     - Long enter press in main view of any app should always redirect to time
 - Timers
-    - Add pause to timers (long press enter)
+    - There is only one pending timer at a time
 - Add pulsar mode (blinky blinky)
     - BPM capture by button press
 - Alarms
@@ -31,3 +31,6 @@
 - stopwatch
 - pulsar
 - breathing
+
+## Bugs
+- There could be problems with masked blinking on digits 8 and 9

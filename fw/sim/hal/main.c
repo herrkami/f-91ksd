@@ -132,7 +132,9 @@ void hal_lcd_dig_set_blink(uint8_t dig, uint8_t blink) {
 void hal_lcd_dig_set_blink_mask(uint16_t mask) {
 	uint8_t i = 0;
 	while(i < 10) {
-		hal_lcd_dig_set_blink(i, mask&(1<<i));
+		if(mask & (1<<i)) {
+			hal_lcd_dig_set_blink(i, 1);
+		}
 		i++;
 	}
 

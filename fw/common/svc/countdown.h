@@ -6,7 +6,8 @@
 
 typedef enum {
 	SVC_COUNTDOWN_STATE_STOP = 0,
-	SVC_COUNTDOWN_STATE_RUN
+	SVC_COUNTDOWN_STATE_RUN,
+	SVC_COUNTDOWN_STATE_PAUSE,
 } svc_countdown_state_t;
 
 #define SVC_COUNTDOWN_COMMON \
@@ -28,6 +29,7 @@ void svc_countdown_get(uint8_t index, svc_countdown_t *out);
 void svc_countdown_set_time(uint8_t index, uint8_t h, uint8_t m, uint8_t s);
 void svc_countdown_start(uint8_t index);
 void svc_countdown_stop(uint8_t index);
+void svc_countdown_play_pause(uint8_t index);
 void svc_countdown_process(void);
 uint8_t svc_countdown_get_n_running(void);
 uint8_t svc_countdown_get_pending(void);

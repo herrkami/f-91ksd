@@ -72,8 +72,23 @@ void svc_countdown_stop(uint8_t index) {
 }
 
 void svc_countdown_start(uint8_t index) {
-	countdowns_running++;
+	if(svc_countdowns[index].state != SVC_COUNTDOWN_STATE_PAUSE) {
+		countdowns_running++;
+	}
 	svc_countdowns[index].state = SVC_COUNTDOWN_STATE_RUN;
+}
+
+static void _svc_countdown_pause(uint8_t index) {
+	svc_countdowns[index].state = SVC_COUNTDOWN_STATE_PAUSE;
+}
+
+void svc_countdown_play_pause(uint8_t index) {
+	if(svc_countdowns[index].state == SVC_COUNTDOWN_STATE_RUN) {
+		_svc_countdown_pause(index);
+	}
+	else if(svc_countdowns[index].state == SVC_COUNTDOWN_STATE_PAUSE) {
+		svc_countdown_start(index);
+	}
 }
 
 static uint8_t svc_countdown_dec(svc_countdown_priv_t *cd) {
