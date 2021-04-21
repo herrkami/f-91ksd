@@ -7,6 +7,7 @@ typedef enum {
 	SVC_AUX_TIMER_REQUIRED_CHRO   = (1<<2),
 	SVC_AUX_TIMER_REQUIRED_RIGHTLED   = (1<<3),
 	SVC_AUX_TIMER_REQUIRED_CASELED   = (1<<4),
+	SVC_AUX_TIMER_REQUIRED_PULSAR   = (1<<5),
 } svc_aux_timer_required_t;
 
 void svc_aux_timer_set_required(svc_aux_timer_required_t which, uint8_t state);

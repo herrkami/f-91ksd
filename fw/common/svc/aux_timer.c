@@ -34,6 +34,9 @@ void svc_aux_timer_handler(void) {
 	if(aux_timer_req & SVC_AUX_TIMER_REQUIRED_CASELED) {
 		svc_aux_timer_caseled_handler();
 	}
+	if(aux_timer_req & SVC_AUX_TIMER_REQUIRED_PULSAR) {
+		svc_aux_timer_pulsar_handler();
+	}
 }
 
 void svc_aux_timer_set_call_main(void) {

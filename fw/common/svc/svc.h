@@ -5,6 +5,7 @@
 #include "main.h"
 #include "menu.h"
 #include "leds.h"
+#include "pulsar.h"
 #include "beep.h"
 #include "melody.h"
 #include "chro.h"
