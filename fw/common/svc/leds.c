@@ -54,7 +54,11 @@ void svc_aux_timer_caseled_handler(void) {
 // Right LED key press
 
 static uint8_t  SECTION_INFOMEM rightled_key_enable = 1;
-static uint16_t SECTION_INFOMEM rightled_key_duration = 20;
+#if BUILD_FOR_MCU
+    static uint16_t SECTION_INFOMEM rightled_key_duration = 3;
+#else
+    static uint16_t SECTION_INFOMEM rightled_key_duration = 20;
+#endif
 
 void svc_flash_rightled_key(void) {
     if(rightled_key_enable) {
@@ -81,7 +85,11 @@ void svc_flash_rightled_key_set_enable(uint8_t e) {
 // Case LED minute
 
 static uint8_t  SECTION_INFOMEM caseled_minute_enable = 1;
-static uint16_t SECTION_INFOMEM caseled_minute_duration = 20;
+#if BUILD_FOR_MCU
+    static uint16_t SECTION_INFOMEM caseled_minute_duration = 3;
+#else
+    static uint16_t SECTION_INFOMEM caseled_minute_duration = 20;
+#endif
 
 void svc_flash_caseled_minute(void) {
 	static uint8_t minute_last = 255;

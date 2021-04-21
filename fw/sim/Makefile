@@ -1,5 +1,5 @@
 CC=gcc
-LD=ld 
+LD=ld
 AR=ar
 AS=as
 CP=objcopy
@@ -31,11 +31,11 @@ CFLAGS  =$(DEBUG)  $(OPTIMIZE) $(shell pkg-config --cflags libpulse) -MP -MMD -p
 LDFLAGS = -lzmq -lm $(shell pkg-config --libs libpulse) -pthread -lmbedcrypto
 
 $(EXECUTABLE): $(OBJ)
-	$(CC) $(CFLAGS) $(sort $(OBJ)) $(LDFLAGS) -o $@
+	$(CC) $(CFLAGS) $(sort $(OBJ)) $(LDFLAGS) -D BUILD_FOR_MCU=false -o $@
 
 $(COBJ): $(BUILDPREFIX)%.o: %.c
 	mkdir -p $(shell dirname $@)
-	$(CC) -c $(DEFINES) $(INC) $(CFLAGS) $< -o $@
+	$(CC) -c $(DEFINES) $(INC) $(CFLAGS) $< -D BUILD_FOR_MCU=false -o $@
 
 $(SOBJ): $(BUILDPREFIX)%.o: %.s
 	$(AS) -c $(ASFLAGS) $< -o $@
