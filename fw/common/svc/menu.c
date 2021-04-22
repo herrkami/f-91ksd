@@ -112,13 +112,13 @@ void svc_menu_run(const svc_menu_t *menu, svc_menu_state_t *state, svc_main_proc
 			}
 		}
 
-		svc_lcd_puti(0, it->digits, it->handler_get(it->user_data));
+		svc_lcd_puti(it->offset, it->digits, it->handler_get(it->user_data));
 		if(event & SVC_MAIN_PROC_EVENT_KEY_ENTER) {
 			INC_MOD(state->adj_digit, it->digits);
 		}
 		if(state->adj_digit < it->digits) {
 			// hal_lcd_dig_set_blink_mask(1<<state->adj_digit);
-			hal_lcd_dig_set_blink(state->adj_digit, 1);
+			hal_lcd_dig_set_blink(state->adj_digit+it->offset, 1);
 		}
 	}
 }

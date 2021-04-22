@@ -52,6 +52,7 @@ typedef struct {
 	void (*handler_enter)(void *user_data);
 	void (*handler_leave)(void *user_data);
 	uint8_t digits;
+	uint8_t offset;
 } svc_menu_item_adj_t;
 
 typedef struct {
