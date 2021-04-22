@@ -9,6 +9,7 @@ static const svc_pulsar_frame_t *frame_cur = 0;
 static const svc_pulsar_frame_t *frame_start = 0;
 static uint64_t pulsar_phi;
 static uint64_t pulsar_phinext;
+static uint64_t pulsar_seq = 2;
 static uint8_t repeat;
 static uint64_t pulsar_dphi = 120/60*SVC_PULSAR_PHI_MAX/SVC_PULSAR_F_SAMPLE;
 
@@ -107,6 +108,14 @@ void svc_pulsar_play_repeat(uint8_t seq, uint8_t rep){
 
 void svc_pulsar_play(uint8_t seq){
     svc_pulsar_play_repeat(seq, 1);
+}
+
+void svc_pulsar_sequence_set(uint8_t seq) {
+    pulsar_seq = seq;
+}
+
+uint8_t svc_pulsar_sequence_get(void) {
+    return pulsar_seq;
 }
 
 void svc_pulsar_stop(void){

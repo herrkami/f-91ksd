@@ -76,7 +76,7 @@ static void start_stop(void *ud) {
     uint8_t pulsar_state = svc_pulsar_state_get();
 	if(pulsar_state == SVC_PULSAR_STATE_STOP) {
         // TODO introduce state variable for current sequence
-		svc_pulsar_play_repeat(2, 255);
+		svc_pulsar_play_repeat(svc_pulsar_sequence_get(), 255);
 	}
 	else {
 		svc_pulsar_stop();
@@ -90,9 +90,34 @@ static const svc_menu_item_text_t menu_item_start_stop = {
 	.handler_draw = start_stop_draw,
 };
 
+
+static void sequence_set(uint8_t choice, void *ud) {
+	svc_pulsar_sequence_set(choice);
+}
+
+static uint8_t sequence_get(void *ud) {
+	return svc_pulsar_sequence_get();
+}
+
+static void sequence_draw(svc_menu_state_t *state, svc_menu_item_unknown_t *item, void *user_data) {
+	svc_lcd_putsn(4, 2, svc_pulsar_seqs[svc_pulsar_sequence_get()].title);
+}
+
+static svc_menu_item_choice_t menu_item_sequence = {
+	.type = SVC_MENU_ITEM_T_CHOICE,
+	.text = " seq",
+	.choice_pos = 4,
+	.n_choices = 3,
+	.choices = {""},
+	.handler_set = sequence_set,
+	.handler_get = sequence_get,
+	.handler_draw = sequence_draw,
+};
+
 static const svc_menu_item_unknown_t *menu_items[] = {
 	(void*)&menu_item_start_stop,
 	(void*)&menu_item_hbpm,
+	(void*)&menu_item_sequence,
 };
 
 static const svc_menu_t menu = {

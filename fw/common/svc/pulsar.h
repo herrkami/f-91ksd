@@ -37,6 +37,8 @@ void svc_pulsar_reset_phase(void);
 void svc_pulsar_play_repeat(uint8_t seq, uint8_t rep);
 void svc_pulsar_play(uint8_t seq);
 void svc_pulsar_stop(void);
+void svc_pulsar_sequence_set(uint8_t seq);
+uint8_t svc_pulsar_sequence_get(void);
 uint8_t svc_pulsar_state_get(void);
 uint8_t svc_pulsar_alarm_repetitions_get(void);
 void svc_pulsar_alarm_repetitions_set(uint8_t repetitions);

@@ -46,4 +46,4 @@ const svc_pulsar_sequence_t svc_pulsar_seqs[] = {
     {"SN", 0.5*SVC_PULSAR_PHI_MAX/SVC_PULSAR_F_SAMPLE, seq_1},
     {"FT", 0.5*SVC_PULSAR_PHI_MAX/SVC_PULSAR_F_SAMPLE, seq_2},
 };
-const uint8_t svc_pulsar_seqs_n = 1;
+const uint8_t svc_pulsar_seqs_n = 3;
