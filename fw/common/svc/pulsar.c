@@ -152,18 +152,11 @@ void svc_pulsar_measure_tap_handler(void) {
 
     // Factor div increases averaging precision
     static const uint8_t div = 16;
-    uint16_t interval = div*clk_counter;
     clk_counter_total += div*clk_counter;
     clk_counter = 0;
 
-    if (tap_counter == 2) {
-        interval_avg = interval;
-    }
-    else {
-        interval_avg = clk_counter_total/(tap_counter-1);
-        // interval_avg = (tap_counter - 2)*interval_avg + interval;
-        // interval_avg /= (tap_counter - 1);
-    }
+    interval_avg = clk_counter_total/(tap_counter-1);
+
     // Turn intervall into hbpm = 6000*f
     // hbpm = 6000*128*4/interval_avg
     uint32_t hbpm = (6000*SVC_PULSAR_F_SAMPLE*div)/interval_avg;
