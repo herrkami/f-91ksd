@@ -61,8 +61,8 @@ static void start_stop_draw(svc_menu_state_t *state, svc_menu_item_unknown_t *it
 	hal_lcd_dig_set_blink_mask(0b11<<8);
     uint8_t pulsar_state = svc_pulsar_state_get();
 	if(pulsar_state == SVC_PULSAR_STATE_STOP) {
-		svc_lcd_puts(0, "pulse");
-		hal_lcd_dig_set_blink_mask(0b11111);
+		svc_lcd_puts(1, "pulse");
+		hal_lcd_dig_set_blink_mask(0b111110);
 	}
 	else {
 		svc_lcd_puts(0, "stop");
@@ -76,7 +76,7 @@ static void start_stop(void *ud) {
     uint8_t pulsar_state = svc_pulsar_state_get();
 	if(pulsar_state == SVC_PULSAR_STATE_STOP) {
         // TODO introduce state variable for current sequence
-		svc_pulsar_play_repeat(0, 255);
+		svc_pulsar_play_repeat(2, 255);
 	}
 	else {
 		svc_pulsar_stop();

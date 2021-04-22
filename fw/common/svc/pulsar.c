@@ -8,6 +8,7 @@
 static const svc_pulsar_frame_t *frame_cur = 0;
 static const svc_pulsar_frame_t *frame_start = 0;
 static uint64_t pulsar_phi;
+static uint64_t pulsar_phinext;
 static uint8_t repeat;
 static uint64_t pulsar_dphi = 120/60*SVC_PULSAR_PHI_MAX/SVC_PULSAR_F_SAMPLE;
 
@@ -69,14 +70,18 @@ void svc_aux_timer_pulsar_pulse_handler(void) {
     	}
     	else {
             pulsar_phi += pulsar_dphi;
-            if (pulsar_phi >= SVC_PULSAR_PHI_MAX) {
-
-                // handle pulse events here
+            if (pulsar_phi >= pulsar_phinext) {
                 svc_flash_rightled_timed(frame_cur->led0);
                 svc_flash_caseled_timed(frame_cur->led1);
-
-                pulsar_phi -= SVC_PULSAR_PHI_MAX;
+                uint8_t div = frame_cur->duration ? frame_cur->duration : 1;
+                pulsar_phinext += SVC_PULSAR_PHI_MAX/div;
                 frame_cur++;
+            }
+            if (pulsar_phi >= SVC_PULSAR_PHI_MAX) {
+                pulsar_phi -= SVC_PULSAR_PHI_MAX;
+                if (pulsar_phinext >= SVC_PULSAR_PHI_MAX) {
+                    pulsar_phinext -= SVC_PULSAR_PHI_MAX;
+                }
             }
     	}
 	}
@@ -94,6 +99,8 @@ void svc_pulsar_play_repeat(uint8_t seq, uint8_t rep){
     frame_cur = svc_pulsar_seqs[seq].frames;
     frame_start = svc_pulsar_seqs[seq].frames;
     pulsar_phi = SVC_PULSAR_PHI_MAX;
+    uint8_t div = frame_cur->duration ? frame_cur->duration : 1;
+    pulsar_phinext = SVC_PULSAR_PHI_MAX/div;
     repeat = (!rep)?255:rep;
 	svc_aux_timer_set_required(SVC_AUX_TIMER_REQUIRED_PULSAR_PULSE, 1);
 }

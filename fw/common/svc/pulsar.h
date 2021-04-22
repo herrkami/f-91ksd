@@ -1,8 +1,8 @@
 #pragma once
 #include <stdint.h>
 
-#define SVC_PULSAR_PHI_MAX 0xffffff
-// #define SVC_PULSAR_PHI_MAX 0x1000000
+// #define SVC_PULSAR_PHI_MAX 0xffffff
+#define SVC_PULSAR_PHI_MAX 0x1000000
 #define SVC_PULSAR_F_SAMPLE 128
 #define SVC_PULSAR_NR_LEDS 2
 #define SVC_PULSAR_BBPM_DIV 128
