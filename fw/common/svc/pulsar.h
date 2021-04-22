@@ -32,13 +32,17 @@ uint16_t svc_pulsar_dphi_to_hbpm(uint64_t dphi);
 void svc_pulsar_hbpm_set(uint16_t hbpm);
 uint16_t svc_pulsar_hbpm_get(void);
 
-void svc_aux_timer_pulsar_handler(void);
+void svc_aux_timer_pulsar_pulse_handler(void);
+void svc_pulsar_reset_phase(void);
 void svc_pulsar_play_repeat(uint8_t seq, uint8_t rep);
 void svc_pulsar_play(uint8_t seq);
 void svc_pulsar_stop(void);
 uint8_t svc_pulsar_state_get(void);
 uint8_t svc_pulsar_alarm_repetitions_get(void);
 void svc_pulsar_alarm_repetitions_set(uint8_t repetitions);
+
+void svc_aux_timer_pulsar_measure_handler(void);
+void svc_pulsar_measure_tap_handler(void);
 
 // void svc_pulsar_default_set(uint8_t pulsar_idx);
 // uint8_t svc_pulsar_default_get(void);
