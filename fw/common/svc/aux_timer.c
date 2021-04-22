@@ -2,6 +2,7 @@
 #include "beep.h"
 #include "leds.h"
 #include "melody.h"
+#include "pulsar.h"
 #include "chro.h"
 #include "common/hal/hal.h"
 
@@ -16,6 +17,10 @@ void svc_aux_timer_set_required(svc_aux_timer_required_t which, uint8_t state) {
 		aux_timer_req &= ~which;
 	}
 	hal_aux_timer_set(!!aux_timer_req);
+}
+
+svc_aux_timer_required_t svc_aux_timer_get_required(void) {
+	return aux_timer_req;
 }
 
 void svc_aux_timer_handler(void) {
