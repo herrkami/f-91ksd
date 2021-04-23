@@ -10,8 +10,10 @@ static const svc_pulsar_frame_t *frame_start = 0;
 static uint64_t pulsar_phi;
 static uint64_t pulsar_phinext;
 static uint64_t pulsar_seq = 2;
+static uint8_t pulsar_metronome;
 static uint8_t repeat;
 static uint64_t pulsar_dphi = 120/60*SVC_PULSAR_PHI_MAX/SVC_PULSAR_F_SAMPLE;
+static const uint8_t pulsar_clk_div = 16;
 
 static uint16_t clk_counter;
 static uint16_t tap_counter;
@@ -92,13 +94,14 @@ void svc_aux_timer_pulsar_pulse_handler(void) {
 }
 
 void svc_pulsar_reset_phase(void) {
+    frame_cur = frame_start;
     pulsar_phi = SVC_PULSAR_PHI_MAX;
 }
 
 
-void svc_pulsar_play_repeat(uint8_t seq, uint8_t rep){
-    frame_cur = svc_pulsar_seqs[seq].frames;
-    frame_start = svc_pulsar_seqs[seq].frames;
+void svc_pulsar_play_repeat(uint8_t rep){
+    frame_cur = svc_pulsar_seqs[pulsar_seq].frames;
+    frame_start = svc_pulsar_seqs[pulsar_seq].frames;
     pulsar_phi = SVC_PULSAR_PHI_MAX;
     uint8_t div = frame_cur->duration ? frame_cur->duration : 1;
     pulsar_phinext = SVC_PULSAR_PHI_MAX/div;
@@ -106,8 +109,8 @@ void svc_pulsar_play_repeat(uint8_t seq, uint8_t rep){
 	svc_aux_timer_set_required(SVC_AUX_TIMER_REQUIRED_PULSAR_PULSE, 1);
 }
 
-void svc_pulsar_play(uint8_t seq){
-    svc_pulsar_play_repeat(seq, 1);
+void svc_pulsar_play(void){
+    svc_pulsar_play_repeat(1);
 }
 
 void svc_pulsar_sequence_set(uint8_t seq) {
@@ -142,14 +145,29 @@ void svc_pulsar_alarm_repetitions_set(uint8_t repetitions){
     pulsar_repetitions = repetitions;
 }
 
+uint8_t svc_pulsar_metronome_get(void) {
+    return pulsar_metronome;
+}
 
 void svc_aux_timer_pulsar_measure_handler(void) {
     clk_counter++;
+
+    uint16_t ia = interval_avg/pulsar_clk_div;
+    ia = ia > 0? ia : 1;
+    // if (clk_counter%ia < ia/2) {
+    if ((2*clk_counter)/ia) {
+        pulsar_metronome = 1;
+    }
+    else {
+        pulsar_metronome = 0;
+    }
+
     if (clk_counter > 4*SVC_PULSAR_F_SAMPLE) {
         // Timeout after 4 seconds
         clk_counter = 0;
         tap_counter = 0;
         svc_aux_timer_set_required(SVC_AUX_TIMER_REQUIRED_PULSAR_MEAS, 0);
+        pulsar_metronome = 0;
     }
 }
 
@@ -167,14 +185,13 @@ void svc_pulsar_measure_tap_handler(void) {
     }
 
     // Factor div increases averaging precision
-    static const uint8_t div = 16;
-    clk_counter_total += div*clk_counter;
+    clk_counter_total += pulsar_clk_div*clk_counter;
     clk_counter = 0;
 
     interval_avg = clk_counter_total/(tap_counter-1);
 
-    // Turn intervall into hbpm = 6000*f
+    // Turn interval into hbpm = 6000*f
     // hbpm = 6000*128*4/interval_avg
-    uint32_t hbpm = (6000*SVC_PULSAR_F_SAMPLE*div)/interval_avg;
+    uint32_t hbpm = (6000*SVC_PULSAR_F_SAMPLE*pulsar_clk_div)/interval_avg;
     svc_pulsar_hbpm_set(hbpm);
 }

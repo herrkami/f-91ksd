@@ -46,7 +46,7 @@ void svc_menu_run(const svc_menu_t *menu, svc_menu_state_t *state, svc_main_proc
 				case SVC_MENU_ITEM_T_ADJ : {
 					svc_menu_item_adj_t *it = (void*)it_u;
 					state->adj_mode = 1;
-					state->adj_digit = it->digits-1;
+					state->adj_digit = 0;
 					if(it->handler_enter) {
 						it->handler_enter(it->user_data);
 					}

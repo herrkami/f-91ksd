@@ -76,7 +76,7 @@ static void start_stop(void *ud) {
     uint8_t pulsar_state = svc_pulsar_state_get();
 	if(pulsar_state == SVC_PULSAR_STATE_STOP) {
         // TODO introduce state variable for current sequence
-		svc_pulsar_play_repeat(svc_pulsar_sequence_get(), 255);
+		svc_pulsar_play_repeat(255);
 	}
 	else {
 		svc_pulsar_stop();

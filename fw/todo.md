@@ -19,16 +19,16 @@
 
 ### Pulsar app
 - Features
-    - BPM capture
-    - First beat capture
-    - Make use of all LEDs
-    - BPM display
-    - Different flashing modes (including some randomness)
+    - BPM capture ✓
+    - First beat capture ✓
+    - Make use of all LEDs ✓
+    - BPM display ✓
+    - Different flashing modes ✓
     - Offer metronome click
 - Default view
-    - Show BPM
+    - Show BPM ✓
     - Flash display segment with beat (or other animation)
-    - up button captures BPM
+    - up button captures BPM ✓
 - Main menu
     - Animation modes (choice menu)
     - BPM set (overrides capture)

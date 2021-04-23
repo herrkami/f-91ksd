@@ -1,4 +1,5 @@
 #include "app.h"
+#include "common/hal/lcd_segments.h"
 
 static void main(uint8_t view, const app_t *app, svc_main_proc_event_t event) {
     hal_lcd_clear();
@@ -9,7 +10,6 @@ static void main(uint8_t view, const app_t *app, svc_main_proc_event_t event) {
         app_launch(&app_app_time);
     }
     else if (event & SVC_MAIN_PROC_EVENT_KEY_UP) {
-        // Handle BPM capture
         svc_pulsar_measure_tap_handler();
     }
     uint16_t hbpm = svc_pulsar_hbpm_get();
@@ -20,6 +20,7 @@ static void main(uint8_t view, const app_t *app, svc_main_proc_event_t event) {
     // svc_lcd_puti(1, 5, hbpm);
     svc_lcd_puti(1, 5, hbpm);
     svc_lcd_puts(8, "bt");
+    hal_lcd_seg_set(HAL_LCD_SEG_LAP, svc_pulsar_metronome_get());
 }
 
 static app_view_t views[] = {
