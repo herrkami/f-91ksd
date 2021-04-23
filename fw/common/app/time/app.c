@@ -243,19 +243,30 @@ static void adjh_enter(void *ud) {
 	app_set_view(app_current, 3);
 }
 
-static const svc_menu_item_text_t menu_item_adj = {
+static const svc_menu_item_text_t menu_item_adjh = {
 	.type = SVC_MENU_ITEM_T_TEXT,
 	.text = "zone",
 	.handler = adjh_enter
 };
 
+static void adjt_enter(void *ud) {
+	app_set_view(app_current, 4);
+}
+
+static const svc_menu_item_text_t menu_item_adjt = {
+	.type = SVC_MENU_ITEM_T_TEXT,
+	.text = " time",
+	.handler = adjt_enter
+};
+
 static const svc_menu_item_unknown_t *menu_items[] = {
 	(void*)&menu_item_base,
 	(void*)&menu_item_acal,
-	(void*)&menu_item_time,
+	// (void*)&menu_item_time,
 	(void*)&menu_item_date,
+	(void*)&menu_item_adjt,
 	(void*)&menu_item_lang,
-	(void*)&menu_item_adj,
+	(void*)&menu_item_adjh,
 	(void*)&menu_item_cal,
 	(void*)&menu_item_cal_sign
 };
@@ -293,7 +304,11 @@ static app_view_t views[] = {
 		.main = app_app_time_acal_main,
 	},
 	{
-		.main = app_app_time_adj_main,
+		.main = app_app_time_adjh_main,
+	}
+	,
+	{
+		.main = app_app_time_adjt_main,
 	}
 };
 

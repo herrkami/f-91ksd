@@ -53,11 +53,11 @@ $(OUTDIR)/$(TARGET)_noload.elf : $(OUTDIR)/$(TARGET).elf
 	$(OBJCOPY) --set-section-flags .infoMEM=noload $< $@
 
 $(OUTDIR)/$(TARGET).elf: $(sort $(OBJECTS))
-	$(CC) $(OBJECTS) $(LDFLAGS) $(LIBS) -D BUILD_FOR_MCU=true -o $@
+	$(CC) $(OBJECTS) $(LDFLAGS) $(LIBS) -o $@
 
 $(OBJECTS): $(OUTDIR)/%.o: %.c
 	mkdir -p $(shell dirname $@)
-	$(CC) -c $(CFLAGS) $(INC)-D BUILD_FOR_MCU=true -o $@ $<
+	$(CC) -c $(CFLAGS) $(INC) -o $@ $<
 
 -include  $(OBJECTS:.o=.d)
 

@@ -160,8 +160,8 @@ static svc_menu_item_choice_t menu_item_melody = {
 };
 
 static const svc_menu_item_unknown_t *menu_items[] = {
-	(void*)&menu_item_time,
 	(void*)&menu_item_enable,
+	(void*)&menu_item_time,
 	(void*)&menu_item_days,
 	(void*)&menu_item_melody
 };

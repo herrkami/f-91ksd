@@ -29,4 +29,6 @@ void app_app_time_display_enter(uint8_t view, const app_t *app);
 void app_app_time_acal_main(uint8_t view, const app_t *app, svc_main_proc_event_t event);
 void app_app_time_acal_enter(uint8_t view, const app_t *app);
 
-void app_app_time_adj_main(uint8_t view, const app_t *app, svc_main_proc_event_t event);
+void app_app_time_adjh_main(uint8_t view, const app_t *app, svc_main_proc_event_t event);
+
+void app_app_time_adjt_main(uint8_t view, const app_t *app, svc_main_proc_event_t event);
