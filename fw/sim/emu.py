@@ -4,7 +4,9 @@ import cairo
 import sys
 import json
 import zmq
+import time
 
+LED_ON_TIME_MIN = 20e-3
 
 class Display(Gtk.DrawingArea) :
 
@@ -21,6 +23,9 @@ class Display(Gtk.DrawingArea) :
 		self.backlight = False
 		self.rightled = False
 		self.caseled = False
+		self.backlight_tlast = 0
+		self.rightled_tlast = 0
+		self.caseled_tlast = 0
 		self.blink_state = True
 		self.last_frame_time = 0
 		self.show_names = False
@@ -50,14 +55,29 @@ class Display(Gtk.DrawingArea) :
 		self.emit("key", "E")
 
 	def set_backlight(self, v) :
+		if v:
+			self.backlight_tlast = time.time()
+		else:
+			while time.time() - self.backlight_tlast < LED_ON_TIME_MIN:
+				pass
 		self.backlight = bool(v)
 		self.redraw()
 
 	def set_rightled(self, v) :
+		if v:
+			self.rightled_tlast = time.time()
+		else:
+			while time.time() - self.rightled_tlast < LED_ON_TIME_MIN:
+				pass
 		self.rightled = bool(v)
 		self.redraw()
 
 	def set_caseled(self, v) :
+		if v:
+			self.caseled_tlast = time.time()
+		else:
+			while time.time() - self.caseled_tlast < LED_ON_TIME_MIN:
+				pass
 		self.caseled = bool(v)
 		self.redraw()
 
