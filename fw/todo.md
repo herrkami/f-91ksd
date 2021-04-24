@@ -34,14 +34,14 @@
     - Flash display segment with beat (or other animation)
     - up button captures BPM ✓
 - Main menu
-    - Animation modes (choice menu)
-    - BPM set (overrides capture)
+    - Animation modes (choice menu) ✓
+    - BPM set (overrides capture) ✓
 
 ## HAL
 - Add support for the other two LEDs (PJ.7, P7.2/T0.1) ✓
 - Repair the PWM bug (P1.0/TA0.1 is PWM-capable, not PJ.1)
 - Execute LED service routine in 16 Hz button polling interrupt instead of AUX timer
-- Or (!!!) put all LED handling to AUX timer and soft-PWM them. Three brightness levels @ 128 HZ -> 32 HZ.
+- Or (!!!) put all LED handling to AUX timer and soft-PWM them. Three brightness levels @ 128 HZ -> 32 HZ. 
 - Add hal_click to target and sim
 
 ## Desired menu structure

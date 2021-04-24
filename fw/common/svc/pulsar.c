@@ -15,7 +15,7 @@ static uint8_t repeat;
 static uint64_t pulsar_dphi = 120/60*SVC_PULSAR_PHI_MAX/SVC_PULSAR_F_SAMPLE;
 static const uint16_t pulsar_clk_div = 16;
 
-static uint16_t clk_counter;
+static volatile uint16_t clk_counter;
 static uint16_t clk_counter_max;
 static uint32_t clk_counter_total;
 static uint16_t tap_counter;
@@ -163,10 +163,12 @@ void svc_aux_timer_pulsar_measure_handler(void) {
     else {
         pulsar_metronome = 0;
     }
+    svc_aux_timer_set_call_main();
 
     if (clk_counter > 4*SVC_PULSAR_F_SAMPLE) {
         // Timeout after 4 seconds
-        // clk_counter = 0;
+        clk_counter = 0;
+        clk_counter_total = 0;
         tap_counter = 0;
         svc_aux_timer_set_required(SVC_AUX_TIMER_REQUIRED_PULSAR_MEAS, 0);
         pulsar_metronome = 0;
@@ -174,6 +176,7 @@ void svc_aux_timer_pulsar_measure_handler(void) {
 }
 
 void svc_pulsar_measure_tap_handler(void) {
+
     // Gets called when BPM measure button gets tapped
     tap_counter++;
     svc_pulsar_reset_phase();
@@ -188,6 +191,7 @@ void svc_pulsar_measure_tap_handler(void) {
     // Catch missing taps (that's due to a bug..)
     if ((pulsar_clk_div*clk_counter > (3*interval_avg)/2) & (tap_counter > 3)) {
         clk_counter = interval_avg/pulsar_clk_div;
+        svc_flash_caseled_timed(3);
     }
 
     // Factor div increases averaging precision

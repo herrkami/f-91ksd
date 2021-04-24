@@ -41,6 +41,7 @@ typedef struct {
 
 void hal_rtc_get(hal_rtc_timedate_t *result);
 void hal_rtc_set_time(hal_rtc_timedate_t *time);
+void hal_rtc_reset_second(void);
 void hal_rtc_set_date(hal_rtc_timedate_t *date);
 void hal_rtc_cal_set(int16_t cal);
 int16_t hal_rtc_cal_get(void);

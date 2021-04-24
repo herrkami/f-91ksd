@@ -43,6 +43,12 @@ void hal_rtc_set_time(hal_rtc_timedate_t *time)
 	}
 }
 
+void hal_rtc_reset_second(void)
+{
+	RT0PS = 0;
+	RT1PS = 0;
+}
+
 /* calculate day of week with monday=0 */
 static int wday(int year, int month, int day)
 {

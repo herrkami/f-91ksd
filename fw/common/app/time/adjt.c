@@ -39,12 +39,13 @@ void app_app_time_adjt_main(uint8_t view, const app_t *app, svc_main_proc_event_
 
 		case 1 :
 		case 0 :
-			// if((dir > 0) | ((dir < 0) & (!td.s))) {
-			// 	td.m = CLAMP(td.m+dir, 0, 59);
-			// }
-			//
-			// td.s = dir ? 0 : td.s;
-			td.s = CLAMP(td.s+dir, 0, 59);
+			if((dir > 0) | ((dir < 0) & (!td.s))) {
+				td.m = CLAMP(td.m+dir, 0, 59);
+			}
+			
+			td.s = dir ? 0 : td.s;
+			// td.s = CLAMP(td.s+dir, 0, 59);
+			hal_rtc_reset_second();
 		break ;
 	}
 	if(dir != 0) hal_rtc_set_time(&td);

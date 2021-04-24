@@ -53,7 +53,6 @@ int main(void)
 	}
 	beep_init(1);
 
-	// hal_compass_init();
 	hal_backlight_set(0);
 	svc_init();
 

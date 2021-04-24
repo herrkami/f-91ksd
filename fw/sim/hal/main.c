@@ -258,6 +258,9 @@ void hal_rtc_set_date(hal_rtc_timedate_t *d) {
 void hal_rtc_set_time(hal_rtc_timedate_t *d) {
 }
 
+void hal_rtc_reset_second(void) {
+}
+
 static int16_t rtc_cal_value;
 
 void hal_rtc_cal_set(int16_t cal) {
