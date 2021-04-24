@@ -13,12 +13,9 @@ static void main(uint8_t view, const app_t *app, svc_main_proc_event_t event) {
         svc_pulsar_measure_tap_handler();
     }
     uint16_t hbpm = svc_pulsar_hbpm_get();
-    // uint16_t bpm = hbpm/100;
-    // uint16_t bpm_hundredth = hbpm%100;
-    // svc_lcd_puti(1, 3, bpm);
-    // svc_lcd_puti(4, 2, bpm_hundredth);
-    // svc_lcd_puti(1, 5, hbpm);
     svc_lcd_puti(1, 5, hbpm);
+    // svc_lcd_puti(1, 5, svc_pulsar_interval_avg_get());
+    // svc_lcd_puti(0, 6, svc_pulsar_clk_counter_max_get());
     svc_lcd_puts(8, "bt");
     hal_lcd_seg_set(HAL_LCD_SEG_LAP, svc_pulsar_metronome_get());
 }

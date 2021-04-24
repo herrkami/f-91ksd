@@ -13,11 +13,13 @@ static uint64_t pulsar_seq = 2;
 static uint8_t pulsar_metronome;
 static uint8_t repeat;
 static uint64_t pulsar_dphi = 120/60*SVC_PULSAR_PHI_MAX/SVC_PULSAR_F_SAMPLE;
-static const uint8_t pulsar_clk_div = 16;
+static const uint16_t pulsar_clk_div = 16;
 
 static uint16_t clk_counter;
+static uint16_t clk_counter_max;
+static uint32_t clk_counter_total;
 static uint16_t tap_counter;
-static uint16_t interval_avg;
+static uint32_t interval_avg;
 
 uint64_t svc_pulsar_hbpm_to_dphi(uint16_t hbpm) {
     // 1 hbpm = 1BPM*100
@@ -164,7 +166,7 @@ void svc_aux_timer_pulsar_measure_handler(void) {
 
     if (clk_counter > 4*SVC_PULSAR_F_SAMPLE) {
         // Timeout after 4 seconds
-        clk_counter = 0;
+        // clk_counter = 0;
         tap_counter = 0;
         svc_aux_timer_set_required(SVC_AUX_TIMER_REQUIRED_PULSAR_MEAS, 0);
         pulsar_metronome = 0;
@@ -175,7 +177,6 @@ void svc_pulsar_measure_tap_handler(void) {
     // Gets called when BPM measure button gets tapped
     tap_counter++;
     svc_pulsar_reset_phase();
-    static uint16_t clk_counter_total = 0;
     if (tap_counter == 1) {
         // Start measurement
         clk_counter = 0;
@@ -184,8 +185,14 @@ void svc_pulsar_measure_tap_handler(void) {
         return;
     }
 
+    // Catch missing taps (that's due to a bug..)
+    if ((pulsar_clk_div*clk_counter > (3*interval_avg)/2) & (tap_counter > 3)) {
+        clk_counter = interval_avg/pulsar_clk_div;
+    }
+
     // Factor div increases averaging precision
-    clk_counter_total += pulsar_clk_div*clk_counter;
+    clk_counter_total += (pulsar_clk_div*(uint32_t)clk_counter);
+    clk_counter_max = clk_counter;
     clk_counter = 0;
 
     interval_avg = clk_counter_total/(tap_counter-1);
@@ -194,4 +201,16 @@ void svc_pulsar_measure_tap_handler(void) {
     // hbpm = 6000*128*4/interval_avg
     uint32_t hbpm = (6000*SVC_PULSAR_F_SAMPLE*pulsar_clk_div)/interval_avg;
     svc_pulsar_hbpm_set(hbpm);
+}
+
+uint16_t svc_pulsar_interval_avg_get(void) {
+    return interval_avg;
+}
+
+uint32_t svc_pulsar_clk_counter_total_get(void) {
+    return clk_counter_total;
+}
+
+uint16_t svc_pulsar_clk_counter_max_get(void) {
+    return clk_counter_max;
 }

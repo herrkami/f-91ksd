@@ -2,10 +2,9 @@
 #include <stdint.h>
 
 // #define SVC_PULSAR_PHI_MAX 0xffffff
-#define SVC_PULSAR_PHI_MAX 0x1000000
-#define SVC_PULSAR_F_SAMPLE 128
+#define SVC_PULSAR_PHI_MAX 0x1000000ULL
+#define SVC_PULSAR_F_SAMPLE 128UL
 #define SVC_PULSAR_NR_LEDS 2
-#define SVC_PULSAR_BBPM_DIV 128
 
 typedef enum {
 	SVC_PULSAR_STATE_STOP = 0,
@@ -46,6 +45,10 @@ uint8_t svc_pulsar_metronome_get(void);
 
 void svc_aux_timer_pulsar_measure_handler(void);
 void svc_pulsar_measure_tap_handler(void);
+
+uint16_t svc_pulsar_interval_avg_get(void);
+uint32_t svc_pulsar_clk_counter_total_get(void);
+uint16_t svc_pulsar_clk_counter_max_get(void);
 
 // void svc_pulsar_default_set(uint8_t pulsar_idx);
 // uint8_t svc_pulsar_default_get(void);

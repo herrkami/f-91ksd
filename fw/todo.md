@@ -16,8 +16,12 @@
     - Add light as alarm signal
 - Breathing app
 - Remove OTP
+- Chrono
+    - Read from RTC!
+
 
 ### Pulsar app
+- Read from RTC!
 - Features
     - BPM capture ✓
     - First beat capture ✓
@@ -52,3 +56,4 @@
 
 ## Bugs
 - There could be problems with masked blinking on digits 8 and 9
+- aux timer routine sometimes dropped! e.g. svc_pulsar_measure_tap_handler() doesn't get called

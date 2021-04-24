@@ -24,11 +24,17 @@ svc_aux_timer_required_t svc_aux_timer_get_required(void) {
 }
 
 void svc_aux_timer_handler(void) {
-	if(aux_timer_req & SVC_AUX_TIMER_REQUIRED_BEEP) {
-		svc_aux_timer_beep_handler();
+	if(aux_timer_req & SVC_AUX_TIMER_REQUIRED_PULSAR_MEAS) {
+		svc_aux_timer_pulsar_measure_handler();
+	}
+	if(aux_timer_req & SVC_AUX_TIMER_REQUIRED_PULSAR_PULSE) {
+		svc_aux_timer_pulsar_pulse_handler();
 	}
 	if(aux_timer_req & SVC_AUX_TIMER_REQUIRED_MELODY) {
 		svc_aux_timer_melody_handler();
+	}
+	if(aux_timer_req & SVC_AUX_TIMER_REQUIRED_BEEP) {
+		svc_aux_timer_beep_handler();
 	}
 	if(aux_timer_req & SVC_AUX_TIMER_REQUIRED_CHRO) {
 		svc_aux_timer_chro_handler();
@@ -38,12 +44,6 @@ void svc_aux_timer_handler(void) {
 	}
 	if(aux_timer_req & SVC_AUX_TIMER_REQUIRED_CASELED) {
 		svc_aux_timer_caseled_handler();
-	}
-	if(aux_timer_req & SVC_AUX_TIMER_REQUIRED_PULSAR_PULSE) {
-		svc_aux_timer_pulsar_pulse_handler();
-	}
-	if(aux_timer_req & SVC_AUX_TIMER_REQUIRED_PULSAR_MEAS) {
-		svc_aux_timer_pulsar_measure_handler();
 	}
 }
 
