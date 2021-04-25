@@ -175,6 +175,41 @@ void svc_aux_timer_pulsar_measure_handler(void) {
     }
 }
 
+// uint16_t svc_pulsar_get_rtc_clk_count(void) {
+//     // Reliable until excluding 4 seconds
+//     static uint16_t clk_sample = 0;
+//     static uint16_t clk_sample_prev = 0;
+//     // Majority vote because of asynchronious RTC clock
+//     uint16_t _clk_sample[4];
+//     for (uint8_t i=0; i++; i<4) {
+//         _clk_sample[i] = (uint16_t)(RT1PS<<8) | RT0PS;
+//     }
+//     if (_clk_sample[0] == _clk_sample[1]) {
+//         clk_sample =_clk_sample[0] & 0x7fff;
+//     }
+//     else if (_clk_sample[1] == _clk_sample[2]) {
+//         clk_sample = _clk_sample[1] & 0x7fff;
+//     }
+//     else if (_clk_sample[2] == _clk_sample[3]) {
+//         clk_sample = _clk_sample[2] & 0x7fff;
+//     }
+//     else {
+//         return 0;
+//     }
+//     // So far, bit 14 contains the 1 second bit
+//     // We fill 15 with the 2 seconds bits
+//     hal_rtc_timedate_t td;
+//     hal_rtc_get(&td);
+//     clk_sample = (clk_sample >> 1) | (uint16_t)((td.s&0b10)<<14);
+//     int32_t _clk_counter_rtc = clk_sample_prev - clk_sample;
+//     clk_sample_prev = clk_sample;
+//     // Handle wrap
+//     if (_clk_counter_rtc < 0) {
+//         _clk_counter_rtc += 0xffff;
+//     }
+//     return (uint16_t)_clk_counter_rtc;
+// }
+
 void svc_pulsar_measure_tap_handler(void) {
 
     // Gets called when BPM measure button gets tapped
@@ -182,13 +217,16 @@ void svc_pulsar_measure_tap_handler(void) {
     svc_pulsar_reset_phase();
     if (tap_counter == 1) {
         // Start measurement
-        clk_counter = 0;
+        clk_counter = 4;  // delay until aux timer becomes active
         clk_counter_total = 0;
         svc_aux_timer_set_required(SVC_AUX_TIMER_REQUIRED_PULSAR_MEAS, 1);
         return;
     }
 
-    // Catch missing taps (that's due to a bug..)
+    // clk_counter = svc_pulsar_get_rtc_clk_count();
+    // clk_counter  = clk_counter >> 8;
+
+    // Catch accidentally missing taps
     if ((pulsar_clk_div*clk_counter > (3*interval_avg)/2) & (tap_counter > 3)) {
         clk_counter = interval_avg/pulsar_clk_div;
         svc_flash_caseled_timed(3);
