@@ -217,7 +217,7 @@ void svc_pulsar_measure_tap_handler(void) {
     svc_pulsar_reset_phase();
     if (tap_counter == 1) {
         // Start measurement
-        clk_counter = 4;  // delay until aux timer becomes active
+        clk_counter = 0;  // delay until aux timer becomes active
         clk_counter_total = 0;
         svc_aux_timer_set_required(SVC_AUX_TIMER_REQUIRED_PULSAR_MEAS, 1);
         return;
