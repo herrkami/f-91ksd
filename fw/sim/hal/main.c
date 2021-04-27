@@ -38,6 +38,12 @@ void hal_caseled(uint8_t state) {
 	zmq_send(insock, s, 2, 0);
 }
 
+void hal_backled(uint8_t state) {
+	char s[2] = "L0";
+	s[1] += !!state;
+	zmq_send(insock, s, 2, 0);
+}
+
 void hal_beep(uint16_t freq) {
 	beep_set_freq(freq);
 }

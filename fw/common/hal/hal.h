@@ -25,6 +25,7 @@ void hal_backlight_set(uint8_t bright);
 void hal_beep(uint16_t freq);
 void hal_rightled(uint8_t st);
 void hal_caseled(uint8_t st);
+void hal_backled(uint8_t st);
 uint8_t hal_beep_get_enabled();
 void hal_beep_set_enabled(uint8_t enabled);
 

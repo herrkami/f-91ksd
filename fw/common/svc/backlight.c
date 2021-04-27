@@ -1,8 +1,9 @@
 #include "backlight.h"
+#include "leds.h"
 #include "common/hal/hal.h"
 #include "platform.h"
 
-static uint8_t SECTION_INFOMEM g_brightness = 10;
+static uint8_t SECTION_INFOMEM g_brightness = 3;
 static uint8_t SECTION_INFOMEM g_timeout = 2;
 static uint8_t timer;
 
@@ -22,25 +23,41 @@ uint8_t svc_backlight_timeout_get(void) {
 	return g_timeout;
 }
 
+// void svc_backlight_process(svc_main_proc_event_t ev) {
+// 	if(ev & SVC_MAIN_PROC_EVENT_KEY_UP_LONG) {
+// 		timer = g_timeout*4;
+// 		hal_backlight_set(g_brightness);
+// 	}
+// 	if((ev & (SVC_MAIN_PROC_EVENT_KEY_ANY | SVC_MAIN_PROC_EVENT_KEY_ANY_LONG)) && timer) {
+// 		timer = g_timeout*4;
+// 	}
+//
+// 	if(ev & SVC_MAIN_PROC_EVENT_TICK) { //decrement
+// 		if(timer) {
+// 			timer--;
+// 		}
+// 		else {
+// 			hal_backlight_set(0);
+// 		}
+// 	}
+// }
 void svc_backlight_process(svc_main_proc_event_t ev) {
 	if(ev & SVC_MAIN_PROC_EVENT_KEY_UP_LONG) {
 		timer = g_timeout*4;
-		hal_backlight_set(g_brightness);
+		svc_flash_backled_timed(g_timeout*128, g_brightness);
 	}
 	if((ev & (SVC_MAIN_PROC_EVENT_KEY_ANY | SVC_MAIN_PROC_EVENT_KEY_ANY_LONG)) && timer) {
 		timer = g_timeout*4;
+		svc_flash_backled_timed(g_timeout*128, g_brightness);
 	}
-	
+
 	if(ev & SVC_MAIN_PROC_EVENT_TICK) { //decrement
 		if(timer) {
 			timer--;
-		}
-		else {
-			hal_backlight_set(0);
 		}
 	}
 }
 
 void svc_backlight_start(void) {
-	
+
 }

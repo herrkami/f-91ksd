@@ -100,6 +100,17 @@ void hal_caseled(uint8_t state) {
 	}
 }
 
+void hal_backled(uint8_t state) {
+	// TODO
+	// Use PWM instead
+	if(state) {
+		PCONF(J, 1, OUH); //light on
+	}
+	else {
+		PCONF(J, 1, OUL); //light off
+	}
+}
+
 void hal_backlight_set(uint8_t brightness) {
 	g_brightness = brightness;
 	beep_backlight(g_freq, g_brightness);

@@ -76,8 +76,8 @@ void svc_aux_timer_pulsar_pulse_handler(void) {
     	else {
             pulsar_phi += pulsar_dphi;
             if (pulsar_phi >= pulsar_phinext) {
-                svc_flash_rightled_timed(frame_cur->led0);
-                svc_flash_caseled_timed(frame_cur->led1);
+                svc_flash_rightled_timed(frame_cur->led0, 4);
+                svc_flash_caseled_timed(frame_cur->led1, 4);
                 uint8_t div = frame_cur->duration ? frame_cur->duration : 1;
                 pulsar_phinext += SVC_PULSAR_PHI_MAX/div;
                 frame_cur++;
@@ -229,7 +229,7 @@ void svc_pulsar_measure_tap_handler(void) {
     // Catch accidentally missing taps
     if ((pulsar_clk_div*clk_counter > (3*interval_avg)/2) & (tap_counter > 3)) {
         clk_counter = interval_avg/pulsar_clk_div;
-        svc_flash_caseled_timed(3);
+        svc_flash_caseled_timed(3, 4);
     }
 
     // Factor div increases averaging precision

@@ -1,7 +1,8 @@
 # TODOs
 
 ## Next
-- Optimize LED operations ()
+- Optimize LED operations (soft PWM)
+- handle LED functions in one aux timer instead of three maybe? 
 - Better and more LED sequences
 - Configure energytrace util for 3.0 V (not possible :()
 - Restructure menus
