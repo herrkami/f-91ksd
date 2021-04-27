@@ -9,6 +9,9 @@ static void main(uint8_t view, const app_t *app, svc_main_proc_event_t event) {
     else if (event & SVC_MAIN_PROC_EVENT_KEY_DOWN) {
         app_launch(&app_app_time);
     }
+    else if(event & SVC_MAIN_PROC_EVENT_KEY_DOWN_LONG) {
+		app_launch(&app_app_time);
+	}
     else if (event & SVC_MAIN_PROC_EVENT_KEY_UP) {
         svc_pulsar_measure_tap_handler();
     }

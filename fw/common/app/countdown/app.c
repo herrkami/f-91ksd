@@ -13,6 +13,9 @@ static void main(uint8_t view, const app_t *app, svc_main_proc_event_t event) {
 		// Pause/play timer
 		svc_countdown_play_pause(PRIV(app)->countdown_current);
 	}
+	else if(event & SVC_MAIN_PROC_EVENT_KEY_DOWN_LONG) {
+		app_launch(&app_app_time);
+	}
 	// else if(event & SVC_MAIN_PROC_EVENT_KEY_DOWN_LONG) {
 	// // else if(event & SVC_MAIN_PROC_EVENT_KEY_ENTER) {
 	// 	svc_countdown_t cd;

@@ -153,11 +153,11 @@ void svc_aux_timer_leds_handler(void) {
 // Right LED key press
 
 static uint8_t  SECTION_INFOMEM rightled_key_enable = 1;
-static uint16_t SECTION_INFOMEM rightled_key_duration = 32;
+static uint16_t SECTION_INFOMEM rightled_key_duration = 1;
 
 void svc_flash_rightled_key(void) {
     if(rightled_key_enable) {
-        svc_flash_rightled_timed(rightled_key_duration, 2);
+        svc_flash_rightled_timed(rightled_key_duration, 3);
     }
 }
 

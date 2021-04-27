@@ -9,8 +9,9 @@ static void main(uint8_t view, const app_t *app, svc_main_proc_event_t event) {
 		// DEC_MOD(PRIV(app)->alarm_current, svc_alarms_n);
 		app_launch(&app_app_chro);
 	}
-	else if(event & SVC_MAIN_PROC_EVENT_KEY_ENTER_LONG) {
-		app_exit();
+	else if(event & SVC_MAIN_PROC_EVENT_KEY_DOWN_LONG) {
+		// app_exit();
+		app_launch(&app_app_time);
 	}
 
 	svc_lcd_puts(8, "al");

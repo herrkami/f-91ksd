@@ -47,6 +47,10 @@ static void main(uint8_t view, const app_t *app, svc_main_proc_event_t event) {
 		// app_exit();
 		app_launch(&app_app_pulsar);
 	}
+	else if(event & SVC_MAIN_PROC_EVENT_KEY_DOWN_LONG) {
+		// app_exit();
+		app_launch(&app_app_time);
+	}
 
 	switch(st) {
 		case SVC_CHRO_STATE_RUN :

@@ -2,7 +2,8 @@
 
 static void conf_exit(void) {
 	PRIV(app_current)->st.item_current = 0;
-	app_exit();
+	// app_exit();
+	app_launch(&app_app_time);
 }
 
 /* settings for keybeep ******************************************************/

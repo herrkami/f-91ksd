@@ -19,11 +19,9 @@ void app_app_time_display_main(uint8_t view, const app_t *app, svc_main_proc_eve
 		PRIV(app)->needs_clear = 1;
 		memset(td_last, 0xff, sizeof(hal_rtc_timedate_t)); //force update of all digits
 	}
-	// if(event & SVC_MAIN_PROC_EVENT_KEY_ENTER_LONG) {
-	if(event & SVC_MAIN_PROC_EVENT_KEY_UP) {
+	if(event & SVC_MAIN_PROC_EVENT_KEY_ENTER_LONG) {
 		app_set_view(app, 1);
 	}
-	// else if(event & SVC_MAIN_PROC_EVENT_KEY_DOWN) {
 	else if(event & SVC_MAIN_PROC_EVENT_KEY_UP) {
 		PRIV(app)->display_date = !PRIV(app)->display_date;
 		PRIV(app)->needs_clear = 1;
@@ -35,7 +33,8 @@ void app_app_time_display_main(uint8_t view, const app_t *app, svc_main_proc_eve
 		app_launch(&app_app_countdown);
 	}
 	else if(event & SVC_MAIN_PROC_EVENT_KEY_DOWN_LONG) {
-		app_exit();
+		// app_exit();
+		app_launch(&app_app_conf);
 	}
 	if(PRIV(app)->needs_clear) {
 		hal_lcd_clear();
