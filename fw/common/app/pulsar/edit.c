@@ -1,4 +1,5 @@
 #include "app.h"
+#include "common/svc/svc.h"
 
 static void menu_exit(void) {
 	PRIV(app_current)->edit_menu_state.item_current = 0;
@@ -107,7 +108,8 @@ static svc_menu_item_choice_t menu_item_sequence = {
 	.type = SVC_MENU_ITEM_T_CHOICE,
 	.text = " seq",
 	.choice_pos = 4,
-	.n_choices = 3,
+	// .n_choices = svc_pulsar_seqs_n,
+	.n_choices = 0,
 	.choices = {""},
 	.handler_set = sequence_set,
 	.handler_get = sequence_get,
@@ -129,5 +131,6 @@ static const svc_menu_t menu = {
 };
 
 void app_app_pulsar_edit_main(uint8_t view, const app_t *app, svc_main_proc_event_t event) {
+	menu_item_sequence.n_choices = svc_pulsar_seqs_n;
 	svc_menu_run(&menu, &(PRIV(app)->edit_menu_state), event);
 }

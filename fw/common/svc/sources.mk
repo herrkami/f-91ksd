@@ -5,7 +5,6 @@ SRC += ../common/svc/lcd.c \
        ../common/svc/aux_timer.c \
 	   ../common/svc/leds.c \
 	   ../common/svc/pulsar.c \
-	   ../common/svc/pulsar_seqs.c \
        ../common/svc/beep.c \
        ../common/svc/melody.c \
        ../common/svc/chro.c \
@@ -49,6 +48,9 @@ MELODIES_RTTTL = ../common/svc/melodies.rtttl
 GEN_MELODIES = ../common/svc/gen_melodies.py
 
 SRC += $(MELODIES_C)
+
+SRC += ../common/svc/pulsar_seqs.c
+
 
 $(MELODIES_C) : $(MELODIES_RTTTL) $(GEN_MELODIES)
 	$(GEN_MELODIES) $< 128 > $@

@@ -1,17 +1,22 @@
 # TODOs
 
-## Next
-- Optimize LED operations (soft PWM)
-- handle LED functions in one aux timer instead of three maybe? 
-- Better and more LED sequences
-- Configure energytrace util for 3.0 V (not possible :()
-- Restructure menus
+## Todo next
+- Add option to alarm and timer for LED sequences
+- Better and more LED sequences (repair that only three are shown)
+- Move melody play app to conf
+- Move conf to time menu
 - Remove OTP
 - Add breathing app
+- Preset alarms with historic points in time
+- Add flashlight app for case led
+- Dow key long is always back/leave
+- Enter key / enter key long is always enter or modify
+
+
 
 ## Features
 - Time
-    - Seconds should not be settable. Instead clicking on seconds should reset them to 0 like in the original Casio
+    - Seconds should not be settable. Instead clicking on seconds should reset them to 0 like in the original Casio ✓
 - Restructure menus
     - Move Play app to config menu
     - Add config menu by long up press
@@ -50,7 +55,7 @@
 - Add support for the other two LEDs (PJ.7, P7.2/T0.1) ✓
 - Repair the PWM bug (P1.0/TA0.1 is PWM-capable, not PJ.1)
 - Execute LED service routine in 16 Hz button polling interrupt instead of AUX timer
-- Or (!!!) put all LED handling to AUX timer and soft-PWM them. Three brightness levels @ 128 HZ -> 32 HZ.
+- Or (!!!) put all LED handling to AUX timer and soft-PWM them. Three brightness levels @ 128 HZ -> 32 HZ. ✓
 - Add hal_click to target and sim
 
 ## Desired menu structure
@@ -64,6 +69,7 @@
 - breathing
 
 ## Bugs
-- The first pulsar measurement interval is usually around 100 ms shorter than the succeeding intervals.
+- Switching time zone affects seconds
+- The first pulsar measurement interval is usually around 100 ms shorter than the succeeding intervals. ✓
 - There could be problems with masked blinking on digits 8 and 9 ✓
 - aux timer routine sometimes dropped! e.g. svc_pulsar_measure_tap_handler() doesn't get called ✓
