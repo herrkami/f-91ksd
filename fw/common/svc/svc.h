@@ -13,7 +13,7 @@
 #include "countdown.h"
 #include "backlight.h"
 #include "init.h"
-#include "otp.h"
+// #include "otp.h"
 #include "seconds_since_last_set.h"
 #include "rtc_adj.h"
 // #include "compass.h"

@@ -1,7 +1,7 @@
 #include "common/hal/hal.h"
 #include "common/hal/lcd_segments.h"
 #include "common/svc/svc.h"
-#include "common/svc/otp/oath.h"
+// #include "common/svc/otp/oath.h"
 #include <zmq.h>
 #include <unistd.h>
 #include <assert.h>
@@ -178,13 +178,13 @@ int main(void) {
 	zmq_bind(outsock, "ipc://aswemu-out");
 	char secret[] = {1,2,3};
 
-	int32_t out = 5;
-	oath_totp_generate (secret,
-		    3,
-		    1462981437, //now
-		    30,
-		    0, 6, &out);
-	printf("=%d\n", out);
+	// int32_t out = 5;
+	// oath_totp_generate (secret,
+	// 	    3,
+	// 	    1462981437, //now
+	// 	    30,
+	// 	    0, 6, &out);
+	// printf("=%d\n", out);
 
 	beep_startup();
 	svc_init();

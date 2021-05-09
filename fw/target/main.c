@@ -11,7 +11,7 @@
 #include "common/hal/lcd_segments.h"
 #include "common/hal/hal.h"
 #include "common/svc/svc.h"
-#include "common/svc/otp/oath.h"
+// #include "common/svc/otp/oath.h"
 
 void clk_init(void) {
 	CSCTL0 = CSKEY; /* password */

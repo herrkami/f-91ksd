@@ -20,7 +20,7 @@ static void main(uint8_t view, const app_t *app, svc_main_proc_event_t event) {
 	else if (event & SVC_MAIN_PROC_EVENT_KEY_DOWN) {
 		DEC_MOD(PRIV(app)->item_current, svc_melodies_n);
 	}
-	else if (event & SVC_MAIN_PROC_EVENT_KEY_ENTER_LONG) {
+	else if (event & SVC_MAIN_PROC_EVENT_KEY_DOWN_LONG) {
 		app_exit();
 	}
 	svc_lcd_puts(8, "pl");

@@ -17,7 +17,7 @@ void app_app_time_adjt_main(uint8_t view, const app_t *app, svc_main_proc_event_
 		digit = digit > 1 ? digit - 1 : 5;
 		// digit = !digit ? 5 : digit;
 	}
-	else if (event & SVC_MAIN_PROC_EVENT_KEY_ENTER_LONG) {
+	else if (event & SVC_MAIN_PROC_EVENT_KEY_DOWN_LONG) {
 		app_set_view(app_current, 1);
 	}
 	switch(digit) {
@@ -42,7 +42,7 @@ void app_app_time_adjt_main(uint8_t view, const app_t *app, svc_main_proc_event_
 			if((dir > 0) | ((dir < 0) & (!td.s))) {
 				td.m = CLAMP(td.m+dir, 0, 59);
 			}
-			
+
 			td.s = dir ? 0 : td.s;
 			// td.s = CLAMP(td.s+dir, 0, 59);
 			hal_rtc_reset_second();

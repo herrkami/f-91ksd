@@ -8,7 +8,7 @@ void app_app_otp_items_main(uint8_t view, const app_t *app, svc_main_proc_event_
 	else if (event & SVC_MAIN_PROC_EVENT_KEY_DOWN) {
 		DEC_MOD(PRIV(app)->item_current, svc_otp_n_items);
 	}
-	else if (event & SVC_MAIN_PROC_EVENT_KEY_ENTER_LONG) {
+	else if (event & SVC_MAIN_PROC_EVENT_KEY_DOWN_LONG) {
 		app_set_view(app_current, 0);
 	}
 

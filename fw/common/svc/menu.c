@@ -19,7 +19,7 @@ void svc_menu_run(const svc_menu_t *menu, svc_menu_state_t *state, svc_main_proc
 		else if(event & SVC_MAIN_PROC_EVENT_KEY_UP) {
 			DEC_MOD(*item_current, menu->n_items);
 		}
-		else if(event & SVC_MAIN_PROC_EVENT_KEY_ENTER_LONG) {
+		else if(event & SVC_MAIN_PROC_EVENT_KEY_DOWN_LONG) {
 			if(menu->handler_exit) {
 				menu->handler_exit();
 			}

@@ -9,7 +9,7 @@ void app_app_conf_debug_main(uint8_t view, const app_t *app, svc_main_proc_event
 	else if (event & SVC_MAIN_PROC_EVENT_KEY_DOWN) {
 		DEC_MOD(PRIV(app)->debug_item_current, HAL_DEBUG_N);
 	}
-	else if (event & SVC_MAIN_PROC_EVENT_KEY_ENTER_LONG) {
+	else if (event & SVC_MAIN_PROC_EVENT_KEY_DOWN_LONG) {
 		app_set_view(app, 0);
 		PRIV(app)->debug_item_current = 0;
 	}
