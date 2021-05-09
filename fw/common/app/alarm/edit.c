@@ -144,6 +144,10 @@ static void melody_set(uint8_t choice, void *ud) {
 	svc_alarm_set_melody(PRIV(app_current)->alarm_current, choice);
 }
 
+static void melody_play(uint8_t choice, void *ud) {
+	svc_melody_play(choice);
+}
+
 static void melody_draw(svc_menu_state_t *state, svc_menu_item_unknown_t *item, void *user_data) {
 	svc_alarm_t al;
 	svc_alarm_get(PRIV(app_current)->alarm_current, &al);
@@ -159,6 +163,7 @@ static svc_menu_item_choice_t menu_item_melody = {
 	.choices = {""},
 	.handler_set = melody_set,
 	.handler_get = melody_get,
+	.handler_special = melody_play,
 	.handler_draw = melody_draw
 };
 
@@ -172,6 +177,10 @@ static uint8_t pulsar_get(void *ud) {
 	svc_alarm_t al;
 	svc_alarm_get(PRIV(app_current)->alarm_current, &al);
 	return al.pulsar;
+}
+
+static void pulsar_play(uint8_t choice, void *ud) {
+	svc_pulsar_play_repeat(choice, 1);
 }
 
 static void pulsar_draw(svc_menu_state_t *state, svc_menu_item_unknown_t *item, void *user_data) {
@@ -189,6 +198,7 @@ static svc_menu_item_choice_t menu_item_pulsar = {
 	.choices = {""},
 	.handler_set = pulsar_set,
 	.handler_get = pulsar_get,
+	.handler_special = pulsar_play,
 	.handler_draw = pulsar_draw,
 };
 

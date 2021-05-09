@@ -37,6 +37,7 @@ typedef struct {
 	SVC_MENU_ITEM_COMMON
 	char *text;
 	void (*handler_set)(uint8_t choice, void *user_data);
+	void (*handler_special)(uint8_t choice, void *user_data);
 	uint8_t (*handler_get)(void *user_data);
 	uint8_t n_choices;
 	uint8_t choice_pos;

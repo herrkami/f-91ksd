@@ -53,6 +53,18 @@ void svc_menu_run(const svc_menu_t *menu, svc_menu_state_t *state, svc_main_proc
 				} break;
 			}
 		}
+		else if(event & SVC_MAIN_PROC_EVENT_KEY_ENTER_LONG) {
+			svc_menu_item_unknown_t *it_u = menu->items[*item_current];
+			switch(it_u->type) {
+				case SVC_MENU_ITEM_T_CHOICE : {
+					svc_menu_item_choice_t *it = (void*)it_u;
+					uint8_t c = it->handler_get(it->user_data);
+					if(it->handler_special) {
+						it->handler_special(c, it->user_data);
+					}
+				} break;
+			}
+		}
 		svc_menu_item_unknown_t *it_u = menu->items[*item_current];
 
 		if(menu->header) {

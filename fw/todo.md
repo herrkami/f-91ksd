@@ -1,8 +1,6 @@
 # TODOs
 
 ## Todo next
-- Move melody play app to conf
-- Move conf to time menu
 - Preset alarms with historic points in time
 - Better and more LED sequences (repair that only three are shown)
 - Add flashlight app for case led
