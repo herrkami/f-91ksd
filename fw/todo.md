@@ -1,17 +1,15 @@
 # TODOs
 
 ## Todo next
-- Add option to alarm and timer for LED sequences
-- Better and more LED sequences (repair that only three are shown)
 - Move melody play app to conf
 - Move conf to time menu
 - Remove OTP
-- Add breathing app
-- Preset alarms with historic points in time
-- Add flashlight app for case led
 - Dow key long is always back/leave
 - Enter key / enter key long is always enter or modify
-
+- Preset alarms with historic points in time
+- Better and more LED sequences (repair that only three are shown)
+- Add flashlight app for case led
+- Add breathing app
 
 
 ## Features

@@ -1,5 +1,6 @@
 #include "countdown.h"
 #include "melody.h"
+#include "pulsar.h"
 #include "lcd.h"
 #include "common/hal/hal.h"
 #include "common/hal/lcd_segments.h"
@@ -26,6 +27,7 @@ const uint8_t svc_countdowns_n = SVC_COUNTDOWN_NR;
 void svc_countdown_init(void) {
 	for(uint8_t i=0; i<svc_countdowns_n; i++) {
 		svc_countdowns[i].melody = svc_default_melody_get();
+		svc_countdowns[i].pulsar = svc_default_pulsar_get();
 		svc_countdowns[i].successor = SVC_COUNTDOWN_SUCCESSOR_NONE;
 	}
 	svc_countdown_set_time(0, 0, 1, 0);
@@ -39,9 +41,6 @@ void svc_countdown_init(void) {
 	svc_countdown_set_time(8, 1, 0, 0);
 	svc_countdown_set_time(9, 1, 30, 0);
 	svc_countdown_set_time(10, 2, 0, 0);
-
-	// TEST
-	// svc_countdowns[0].successor = 0;
 }
 
 void svc_countdown_get(uint8_t index, svc_countdown_t *out) {
@@ -115,7 +114,11 @@ void svc_countdown_process(void) {
 	if(countdowns_running > 0) {
 		for(uint8_t i=0; i<svc_countdowns_n; i++) {
 			if(svc_countdown_dec(&(svc_countdowns[i]))) {
-				svc_melody_play_repeat(svc_countdowns[i].melody, svc_melody_alarm_repetitions_get());
+				svc_melody_play_repeat(
+					svc_countdowns[i].melody, svc_melody_alarm_repetitions_get());
+				svc_pulsar_play_repeat(
+					svc_countdowns[i].pulsar, svc_pulsar_alarm_repetitions_get());
+
 				countdown_pending = i;
 
 				uint8_t successor = svc_countdowns[i].successor;
@@ -154,6 +157,10 @@ void svc_countdown_clear_pending(void) {
 
 void svc_countdown_set_melody(uint8_t index, uint8_t melody) {
 	svc_countdowns[index].melody = melody;
+}
+
+void svc_countdown_set_pulsar(uint8_t index, uint8_t pulsar) {
+	svc_countdowns[index].pulsar = pulsar;
 }
 
 void svc_countdown_set_successor(uint8_t index, uint8_t successor) {

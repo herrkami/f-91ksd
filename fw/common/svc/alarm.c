@@ -1,5 +1,6 @@
 #include "alarm.h"
 #include "melody.h"
+#include "pulsar.h"
 #include "common/hal/hal.h"
 #include "lcd.h"
 #include "common/hal/lcd_segments.h"
@@ -53,6 +54,10 @@ void svc_alarm_set_melody(uint8_t index, uint8_t melody) {
 	svc_alarms[index].melody = melody;
 }
 
+void svc_alarm_set_pulsar(uint8_t index, uint8_t pulsar) {
+	svc_alarms[index].pulsar = pulsar;
+}
+
 uint8_t svc_alarm_get_any_enabled(void) {
 	return !!(alarm_flags & AF_ENABLED);
 }
@@ -69,6 +74,7 @@ void svc_alarm_init(void) {
 	alarm_flags &= ~AF_ENABLED;
 	for(uint8_t i=0; i<svc_alarms_n; i++) {
 		svc_alarms[i].melody = svc_default_melody_get();
+		svc_alarms[i].pulsar = svc_default_pulsar_get();
 		if(svc_alarms[i].enable) {
 			alarm_flags |= AF_ENABLED;
 		}
@@ -88,7 +94,10 @@ void svc_alarm_process(void) {
 	if(td.m != min_last) {
 		for(uint8_t i=0; i<svc_alarms_n; i++) {
 			if(svc_alarm_match(&(svc_alarms[i]), &td)) {
-				svc_melody_play_repeat(svc_alarms[i].melody, svc_melody_alarm_repetitions_get());
+				svc_melody_play_repeat(
+					svc_alarms[i].melody, svc_melody_alarm_repetitions_get());
+				svc_pulsar_play_repeat(
+					svc_alarms[i].pulsar, svc_pulsar_alarm_repetitions_get());
 				alarm_flags |= AF_PENDING;
 				alarm_pending = i;
 			}

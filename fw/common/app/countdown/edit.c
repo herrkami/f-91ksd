@@ -186,10 +186,44 @@ static svc_menu_item_choice_t menu_item_melody = {
 	.handler_draw = melody_draw,
 };
 
+
+// Pulsar sequence menu
+
+static void pulsar_set(uint8_t choice, void *ud) {
+	svc_countdown_set_pulsar(PRIV(app_current)->countdown_current, choice);
+}
+
+static uint8_t pulsar_get(void *ud) {
+	svc_countdown_t cd;
+	svc_countdown_get(PRIV(app_current)->countdown_current, &cd);
+	return cd.pulsar;
+}
+
+static void pulsar_draw(svc_menu_state_t *state, svc_menu_item_unknown_t *item, void *user_data) {
+	svc_countdown_t cd;
+	svc_countdown_get(PRIV(app_current)->countdown_current, &cd);
+	svc_lcd_putsn(4, 2, svc_pulsar_seqs[cd.pulsar].title);
+	svc_lcd_puti(6, 2, PRIV(app_current)->countdown_current);
+}
+
+static svc_menu_item_choice_t menu_item_pulsar = {
+	.type = SVC_MENU_ITEM_T_CHOICE,
+	.text = " pul",
+	.choice_pos = 4,
+	.n_choices = 0,
+	.choices = {""},
+	.handler_set = pulsar_set,
+	.handler_get = pulsar_get,
+	.handler_draw = pulsar_draw,
+};
+
+// General
+
 static const svc_menu_item_unknown_t *menu_items[] = {
 	(void*)&menu_item_start_stop,
 	(void*)&menu_item_time,
 	(void*)&menu_item_melody,
+	(void*)&menu_item_pulsar,
 	(void*)&menu_item_successor
 };
 
@@ -203,5 +237,6 @@ static const svc_menu_t menu = {
 
 void app_app_countdown_edit_main(uint8_t view, const app_t *app, svc_main_proc_event_t event) {
 	menu_item_melody.n_choices = svc_melodies_n;
+	menu_item_pulsar.n_choices = svc_pulsar_seqs_n;
 	svc_menu_run(&menu, &(PRIV(app)->edit_menu_state), event);
 }

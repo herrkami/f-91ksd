@@ -16,6 +16,7 @@ void svc_main_proc(svc_main_proc_event_t event) {
 		keypress = 1;
 		svc_beep_key();
 
+		svc_pulsar_stop();
 		svc_flash_rightled_key();
 	}
 	if(event & SVC_MAIN_PROC_EVENT_AUX_TIMER) {

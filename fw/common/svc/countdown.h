@@ -16,6 +16,7 @@ typedef enum {
 	int8_t s; \
 	svc_countdown_state_t state; \
 	uint8_t melody; \
+	uint8_t pulsar; \
 	uint8_t successor; \
 
 typedef struct {
@@ -35,5 +36,6 @@ uint8_t svc_countdown_get_n_running(void);
 uint8_t svc_countdown_get_pending(void);
 void svc_countdown_clear_pending(void);
 void svc_countdown_set_melody(uint8_t index, uint8_t melody);
+void svc_countdown_set_pulsar(uint8_t index, uint8_t pulsar);
 void svc_countdown_set_successor(uint8_t index, uint8_t successor);
 void svc_countdown_draw_popup(void);

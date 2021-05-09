@@ -21,6 +21,7 @@ static uint32_t clk_counter_total;
 static uint16_t tap_counter;
 static uint32_t interval_avg;
 
+
 uint64_t svc_pulsar_hbpm_to_dphi(uint16_t hbpm) {
     // 1 hbpm = 1BPM*100
     // f = hbpm/6000
@@ -59,6 +60,19 @@ uint16_t svc_pulsar_hbpm_get(void) {
     return hbpm;
 }
 
+
+static uint8_t SECTION_INFOMEM default_pulsar = 0;
+
+uint8_t svc_default_pulsar_get(void) {
+    return default_pulsar;
+}
+
+void svc_default_pulsar_set(uint8_t pulsar) {
+    default_pulsar = pulsar;
+}
+
+
+
 void svc_aux_timer_pulsar_pulse_handler(void) {
     if(frame_cur) {
         // Duration of the last frame is always 0
@@ -91,7 +105,7 @@ void svc_aux_timer_pulsar_pulse_handler(void) {
     	}
 	}
 	else {
-		svc_aux_timer_set_required(SVC_AUX_TIMER_REQUIRED_MELODY, 0);
+		svc_aux_timer_set_required(SVC_AUX_TIMER_REQUIRED_PULSAR_PULSE, 0);
 	}
 }
 
@@ -101,7 +115,7 @@ void svc_pulsar_reset_phase(void) {
 }
 
 
-void svc_pulsar_play_repeat(uint8_t rep){
+void _svc_pulsar_play_repeat(uint8_t rep) {
     frame_cur = svc_pulsar_seqs[pulsar_seq].frames;
     frame_start = svc_pulsar_seqs[pulsar_seq].frames;
     pulsar_phi = SVC_PULSAR_PHI_MAX;
@@ -111,8 +125,13 @@ void svc_pulsar_play_repeat(uint8_t rep){
 	svc_aux_timer_set_required(SVC_AUX_TIMER_REQUIRED_PULSAR_PULSE, 1);
 }
 
-void svc_pulsar_play(void){
-    svc_pulsar_play_repeat(1);
+void svc_pulsar_play_repeat(uint8_t pulsar, uint8_t rep) {
+    svc_pulsar_sequence_set(pulsar);
+    _svc_pulsar_play_repeat(rep);
+}
+
+void svc_pulsar_play(void) {
+    svc_pulsar_play_repeat(svc_pulsar_sequence_get(), 1);
 }
 
 void svc_pulsar_sequence_set(uint8_t seq) {
