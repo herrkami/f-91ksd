@@ -33,6 +33,8 @@ void svc_countdown_stop(uint8_t index);
 void svc_countdown_play_pause(uint8_t index);
 void svc_countdown_process(void);
 uint8_t svc_countdown_get_n_running(void);
+uint8_t svc_coundown_get_running(void);
+uint8_t svc_countdowns_are_running(void);
 uint8_t svc_countdown_get_pending(void);
 void svc_countdown_clear_pending(void);
 void svc_countdown_set_melody(uint8_t index, uint8_t melody);

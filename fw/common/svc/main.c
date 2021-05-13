@@ -65,9 +65,10 @@ void svc_main_proc(svc_main_proc_event_t event) {
 		hal_lcd_seg_set(HAL_LCD_SEG_BELL, 0);
 	}
 
-	if((svc_countdown_get_n_running() > 0) || svc_countdown_get_pending()) {
+	if(svc_countdowns_are_running() || svc_countdown_get_pending()) {
 		hal_lcd_seg_set(HAL_LCD_SEG_BARS, 1);
 		hal_lcd_seg_set_blink(HAL_LCD_SEG_BARS, svc_countdown_get_pending());
+		// hal_lcd_seg_set_blink(HAL_LCD_SEG_BARS, 1);
 	}
 	else {
 		hal_lcd_seg_set(HAL_LCD_SEG_BARS, 0);

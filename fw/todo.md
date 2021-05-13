@@ -1,26 +1,37 @@
 # TODOs
 
 ## Todo next
-- Preset alarms with historic points in time
+- Running counters should be visible and easy to access
+    - The |||||-symbol should blink while a counter is running ✓
+    - A popup window should show the current counter status ✓
+    - Make the routine more efficient! I.e., prevent time from being redrawn everytime when counters are running. Introduce a mode like `display_date` instead.
+- Make more parameters settable (introduce submenus maybe?)
 - Better and more LED sequences (repair that only three are shown)
 - Add flashlight app for case led
 - Add breathing app
+- BUG: Switching time zone affects seconds
+- Limit brightness to only four stages
+- Countdowns should be derived from RTC actually (svc_countdown_dec())
+
+- Fix the melody sound bug: releasing pending timers should also stop sounds ✓
+- Get default BPM from pulsar sequences for alarms ✓
+- Preset alarms with historic points in time ✓
+
 
 
 ## Features
 - Time
     - Seconds should not be settable. Instead clicking on seconds should reset them to 0 like in the original Casio ✓
 - Restructure menus
-    - Move Play app to config menu
-    - Add config menu by long up press
+    - Add config menu by long up press ✓
     - Indicate which menu we are in with blinking top header ✓
-    - Long enter press in main view of any app should always redirect to time
+    - Long enter press in main view of any app should always redirect to time ✓
 - Timers
     - There is only one pending timer at a time
 - Add pulsar mode (blinky blinky) ✓
     - BPM capture by button press ✓
-- Alarms
-    - Add light as alarm signal
+- Alarms ✓
+    - Add light as alarm signal ✓
 - Breathing app
 - Remove OTP ✓
 - Chrono

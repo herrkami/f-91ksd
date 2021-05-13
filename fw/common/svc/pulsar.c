@@ -142,7 +142,7 @@ uint8_t svc_pulsar_sequence_get(void) {
     return pulsar_seq;
 }
 
-void svc_pulsar_stop(void){
+void svc_pulsar_stop(void) {
     svc_aux_timer_set_required(SVC_AUX_TIMER_REQUIRED_PULSAR_PULSE, 0);
 }
 

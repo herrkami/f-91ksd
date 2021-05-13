@@ -56,23 +56,29 @@ void svc_countdown_set_time(uint8_t index, uint8_t h, uint8_t m, uint8_t s) {
 	svc_countdowns[index].ss = s;
 }
 
-static void _svc_countdown_stop(svc_countdown_priv_t *cd) {
-	cd->state = SVC_COUNTDOWN_STATE_STOP;
-	cd->h = cd->sh;
-	cd->m = cd->sm;
-	cd->s = cd->ss;
-	if(countdowns_running) {
-		countdowns_running--;
-	}
-}
+// static void _svc_countdown_stop(svc_countdown_priv_t *cd) {
+// 	cd->state = SVC_COUNTDOWN_STATE_STOP;
+// 	cd->h = cd->sh;
+// 	cd->m = cd->sm;
+// 	cd->s = cd->ss;
+// 	if(countdowns_running) {
+// 		countdowns_running--;
+// 	}
+// }
 
 void svc_countdown_stop(uint8_t index) {
-	_svc_countdown_stop(&(svc_countdowns[index]));
+	// _svc_countdown_stop(&(svc_countdowns[index]));
+	svc_countdowns[index].state = SVC_COUNTDOWN_STATE_STOP;
+	svc_countdowns[index].h = svc_countdowns[index].sh;
+	svc_countdowns[index].m = svc_countdowns[index].sm;
+	svc_countdowns[index].s = svc_countdowns[index].ss;
+	countdowns_running &= ~(1<<index);
 }
 
 void svc_countdown_start(uint8_t index) {
 	if(svc_countdowns[index].state != SVC_COUNTDOWN_STATE_PAUSE) {
-		countdowns_running++;
+		// countdowns_running++;
+		countdowns_running |= (1<<index);
 	}
 	svc_countdowns[index].state = SVC_COUNTDOWN_STATE_RUN;
 }
@@ -90,7 +96,9 @@ void svc_countdown_play_pause(uint8_t index) {
 	}
 }
 
-static uint8_t svc_countdown_dec(svc_countdown_priv_t *cd) {
+// static uint8_t svc_countdown_dec(svc_countdown_priv_t *cd) {
+static uint8_t svc_countdown_dec(uint8_t index) {
+	svc_countdown_priv_t *cd = &svc_countdowns[index];
 	if(cd->state != SVC_COUNTDOWN_STATE_RUN) {
 		return 0;
 	}
@@ -102,7 +110,7 @@ static uint8_t svc_countdown_dec(svc_countdown_priv_t *cd) {
 			cd->m = 59;
 			cd->h--;
 			if(cd->h == -1) {
-				_svc_countdown_stop(cd);
+				svc_countdown_stop(index);
 				return 1;
 			}
 		}
@@ -111,9 +119,10 @@ static uint8_t svc_countdown_dec(svc_countdown_priv_t *cd) {
 }
 
 void svc_countdown_process(void) {
-	if(countdowns_running > 0) {
+	if(countdowns_running) {
 		for(uint8_t i=0; i<svc_countdowns_n; i++) {
-			if(svc_countdown_dec(&(svc_countdowns[i]))) {
+			// if(svc_countdown_dec(&(svc_countdowns[i]))) {
+			if(svc_countdown_dec(i)) {
 				svc_melody_play_repeat(
 					svc_countdowns[i].melody, svc_melody_alarm_repetitions_get());
 				svc_pulsar_play_repeat(
@@ -131,7 +140,8 @@ void svc_countdown_process(void) {
 }
 
 void svc_countdown_draw_popup(void) {
-	static uint8_t div;
+	static uint8_t div = 0;
+
 	if(countdown_pending != NO_COUNTDOWN_PENDING) {
 		if(div < 4) {
 			hal_lcd_seg_set(HAL_LCD_SEG_COLON, 0);
@@ -144,7 +154,19 @@ void svc_countdown_draw_popup(void) {
 }
 
 uint8_t svc_countdown_get_n_running(void) {
+	uint8_t n_running = 0;
+	for(uint8_t i = 0; i < SVC_COUNTDOWN_NR; i++) {
+		n_running += !!(countdowns_running & (1 << i));
+	}
+	return n_running;
+}
+
+uint8_t svc_coundown_get_running(void) {
 	return countdowns_running;
+}
+
+uint8_t svc_countdowns_are_running(void) {
+	return !!countdowns_running;
 }
 
 uint8_t svc_countdown_get_pending(void) {
