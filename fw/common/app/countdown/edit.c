@@ -197,6 +197,7 @@ static svc_menu_item_choice_t menu_item_melody = {
 
 static void pulsar_set(uint8_t choice, void *ud) {
 	svc_countdown_set_pulsar(PRIV(app_current)->countdown_current, choice);
+	svc_pulsar_hbpm_set(svc_pulsar_seqs[choice].hbpm);
 }
 
 static uint8_t pulsar_get(void *ud) {

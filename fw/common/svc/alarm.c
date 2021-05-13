@@ -9,7 +9,16 @@
 #define N_ALARMS 10
 
 static svc_alarm_t SECTION_INFOMEM svc_alarms[N_ALARMS] = {
-	{.h=19, .m=21, .days=0xff, .enable=1}
+	{.h=8, .m=15, .days=SVC_WEEKDAY_MO, .enable=1, .pulsar=0, .melody=10},
+	{.h=11, .m=02, .days=SVC_WEEKDAY_TH, .enable=1, .pulsar=0, .melody=10},
+	{.h=0, .m=0, .days=0xff, .enable=0},
+	{.h=0, .m=0, .days=0xff, .enable=0},
+	{.h=0, .m=0, .days=0xff, .enable=0},
+	{.h=0, .m=0, .days=0xff, .enable=0},
+	{.h=0, .m=0, .days=0xff, .enable=0},
+	{.h=0, .m=0, .days=0xff, .enable=0},
+	{.h=0, .m=0, .days=0xff, .enable=0},
+	{.h=0, .m=0, .days=0xff, .enable=0},
 
 };
 const uint8_t svc_alarms_n = N_ALARMS;
@@ -73,8 +82,8 @@ void svc_alarm_clear_pending(void) {
 void svc_alarm_init(void) {
 	alarm_flags &= ~AF_ENABLED;
 	for(uint8_t i=0; i<svc_alarms_n; i++) {
-		svc_alarms[i].melody = svc_default_melody_get();
-		svc_alarms[i].pulsar = svc_default_pulsar_get();
+		// svc_alarms[i].melody = svc_default_melody_get();
+		// svc_alarms[i].pulsar = svc_default_pulsar_get();
 		if(svc_alarms[i].enable) {
 			alarm_flags |= AF_ENABLED;
 		}

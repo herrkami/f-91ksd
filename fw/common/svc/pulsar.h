@@ -19,7 +19,7 @@ typedef struct {
 
 typedef struct {
     char title[2];
-    uint64_t dphi;
+    uint16_t hbpm;
     const svc_pulsar_frame_t *frames;
 } svc_pulsar_sequence_t;
 

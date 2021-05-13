@@ -9,14 +9,16 @@
 void svc_main_proc(svc_main_proc_event_t event) {
 	static uint8_t keypress;
 	if(event & (SVC_MAIN_PROC_EVENT_KEY_ANY | SVC_MAIN_PROC_EVENT_KEY_ANY_LONG)) {
-		if(svc_alarm_get_pending() || svc_countdown_get_pending()) /* eat event if alarm/countdown shall be disabled (omnomnom) */
+		if(svc_alarm_get_pending() || svc_countdown_get_pending()) {
+			// eat event if alarm/countdown shall be disabled
 			event &= ~(SVC_MAIN_PROC_EVENT_KEY_ANY | SVC_MAIN_PROC_EVENT_KEY_ANY_LONG);
+			svc_pulsar_stop();
+		}
 		svc_alarm_clear_pending();
 		svc_countdown_clear_pending();
 		keypress = 1;
 		svc_beep_key();
 
-		svc_pulsar_stop();
 		svc_flash_rightled_key();
 	}
 	if(event & SVC_MAIN_PROC_EVENT_AUX_TIMER) {

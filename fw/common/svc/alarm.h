@@ -1,6 +1,14 @@
 #pragma once
 #include <stdint.h>
 
+#define SVC_WEEKDAY_MO (1<<0)
+#define SVC_WEEKDAY_TU (1<<1)
+#define SVC_WEEKDAY_WE (1<<2)
+#define SVC_WEEKDAY_TH (1<<3)
+#define SVC_WEEKDAY_FR (1<<4)
+#define SVC_WEEKDAY_SA (1<<5)
+#define SVC_WEEKDAY_SU (1<<6)
+
 typedef struct {
 	uint8_t h;
 	uint8_t m;
