@@ -19,7 +19,7 @@ void app_app_time_adjh_main(uint8_t view, const app_t *app, svc_main_proc_event_
 	else if (event & SVC_MAIN_PROC_EVENT_KEY_ENTER) {
 		app_set_view(app_current, 1);
 	}
-	else if (event & SVC_MAIN_PROC_EVENT_KEY_DOWN_LONG) {
+	else if (event & SVC_MAIN_PROC_EVENT_KEY_ENTER_LONG) {
 		app_set_view(app_current, 1);
 	}
 	svc_lcd_puts(8, "ad");

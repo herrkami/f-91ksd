@@ -6,10 +6,10 @@ void app_app_alarm_days_main(uint8_t view, const app_t *app, svc_main_proc_event
 
 	hal_lcd_clear();
 	if(event & SVC_MAIN_PROC_EVENT_KEY_UP) {
-		INC_MOD(PRIV(app)->day_current, 7);
+		DEC_MOD(PRIV(app)->day_current, 7);
 	}
 	else if (event & SVC_MAIN_PROC_EVENT_KEY_DOWN) {
-		DEC_MOD(PRIV(app)->day_current, 7);
+		INC_MOD(PRIV(app)->day_current, 7);
 	}
 	else if(event & SVC_MAIN_PROC_EVENT_KEY_DOWN_LONG) {
 		app_set_view(app, 1);

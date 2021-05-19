@@ -117,7 +117,7 @@ void svc_menu_run(const svc_menu_t *menu, svc_menu_state_t *state, svc_main_proc
 			it->handler_set(it->digits-state->adj_digit-1, -1, it->user_data);
 		}
 
-		if(event & SVC_MAIN_PROC_EVENT_KEY_DOWN_LONG) {
+		if(event & SVC_MAIN_PROC_EVENT_KEY_ENTER_LONG) {
 			state->adj_mode = 0;
 			if(it->handler_leave) {
 				it->handler_leave(it->user_data);
