@@ -265,9 +265,8 @@ static int32_t backlight_brightness_get(void *ud) {
 }
 
 static void backlight_brightness_set(uint8_t dig, int8_t dir, void *user_data) {
-	int16_t inc = dir*ipow(10, dig);
 	int16_t va = svc_backlight_brightness_get();
-	va = CLAMP(va+inc, 0, 10);
+	va = CLAMP(va+dir, 0, 3);
 	svc_backlight_brightness_set(va);
 }
 
@@ -275,7 +274,7 @@ static const svc_menu_item_adj_t menu_item_backlight_brightness = {
 	.type = SVC_MENU_ITEM_T_ADJ,
 	.header = "bb",
 	.text = "bbri",
-	.digits = 2,
+	.digits = 1,
 	.handler_get = backlight_brightness_get,
 	.handler_set = backlight_brightness_set
 };
@@ -397,23 +396,31 @@ static const svc_menu_item_text_t menu_item_debug = {
 
 
 static const svc_menu_item_text_t *menu_items[] = {
+	(void*)&menu_item_beep_enable,
+
 	(void*)&menu_item_keybeep,
 	(void*)&menu_item_keybeep_freq,
 	(void*)&menu_item_keybeep_duration,
-	(void*)&menu_item_beep_enable,
+
 	(void*)&menu_item_hourbeep,
 	(void*)&menu_item_hourbeep_freq,
 	(void*)&menu_item_hourbeep_duration,
 	(void*)&menu_item_hourbeep_test,
-	(void*)&menu_item_hourbeep_quiet,
-	(void*)&menu_item_hourbeep_quiet_interval,
-	(void*)&menu_item_backlight_timeout,
+	// (void*)&menu_item_hourbeep_quiet,
+	// (void*)&menu_item_hourbeep_quiet_interval,
+
 	(void*)&menu_item_backlight_brightness,
+	(void*)&menu_item_backlight_timeout,
+
 	(void*)&menu_item_lcd_contrast,
+
 	(void*)&menu_item_default_melody,
+
 	(void*)&menu_item_alarm_repetitions,
+
 	(void*)&menu_item_time_to_return_home,
-	(void*)&menu_item_debug
+
+	// (void*)&menu_item_debug
 };
 
 static const svc_menu_t menu = {

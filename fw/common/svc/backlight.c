@@ -3,8 +3,8 @@
 #include "common/hal/hal.h"
 #include "platform.h"
 
-static uint8_t SECTION_INFOMEM g_brightness = 3;
-static uint8_t SECTION_INFOMEM g_timeout = 2;
+static uint8_t SECTION_INFOMEM g_brightness = 1;
+static uint8_t SECTION_INFOMEM g_timeout = 3;
 static uint8_t timer;
 
 

@@ -40,11 +40,6 @@ void app_app_time_display_main(uint8_t view, const app_t *app, svc_main_proc_eve
 		hal_lcd_clear();
 	}
 
-
-	static uint8_t ctr_idx = 0;
-	static uint8_t second_next = 0;
-	uint8_t countdowns_running = svc_coundown_get_running();
-
 	if(PRIV(app)->display_date) {
 		// Display date
 		hal_lcd_seg_set(HAL_LCD_SEG_COLON, 0);
@@ -124,33 +119,30 @@ void app_app_time_display_main(uint8_t view, const app_t *app, svc_main_proc_eve
 	*td_last = td;
 
 	// Countdown state
-	if(countdowns_running) {
-		uint8_t nr_running = countdowns_running ? svc_countdown_get_n_running() : 1;
-		uint8_t counters[nr_running];
-		uint8_t idx = 0;
-		for(uint8_t i = 0; i < SVC_COUNTDOWN_NR; i++) {
-			if(countdowns_running & (1 << i)) {
-				counters[idx] = i;
-				idx++;
+	static uint8_t ctr_idx = 0;
+	static uint8_t timer_second_last = 0;
+	uint8_t timers_running = svc_coundown_get_running();
+
+	if(timers_running) {
+		uint8_t nr_running = timers_running ? svc_countdown_get_n_running() : 1;
+		if(!(td.s%6) && (td.s != timer_second_last)) {
+			ctr_idx = 0;
+			timer_second_last = td.s;
+		}
+		if(ctr_idx < 2*nr_running){
+			uint8_t active_timers[nr_running];
+			uint8_t idx = 0;
+			for(uint8_t i = 0; i < SVC_COUNTDOWN_NR; i++) {
+				if(timers_running & (1 << i)) {
+					active_timers[idx] = i;
+					idx++;
+				}
 			}
-		}
-		// if(td.s >= second_next) {
-		if(!(td.s%4)) {
-			// if((int8_t)(second_next - td.s) < 0)
-			svc_countdown_t cd;
-			svc_countdown_get(counters[ctr_idx], &cd);
-			svc_lcd_puti_fast(0, 2, cd.h);
-			svc_lcd_puti_fast(2, 2, cd.m);
-			svc_lcd_puti_fast(4, 2, cd.s);
-			hal_lcd_seg_set(HAL_LCD_SEG_COLON, 1);
 			svc_lcd_puts(8, "cd");
-			svc_lcd_puti_fast(6, 2, counters[ctr_idx]);
-			// svc_lcd_force_redraw();
-			ctr_idx = (ctr_idx+1)%nr_running;
-			// second_next = (td.s+3)%60;
+			svc_lcd_puti_fast(6, 2, active_timers[ctr_idx/2]);
+			ctr_idx++;
+			PRIV(app)->needs_clear = 1;
 		}
-		// memset(td_last, 0xff, sizeof(hal_rtc_timedate_t)); //force update of all digits
-		PRIV(app)->needs_clear = 1;
 	}
 	else {
 		PRIV(app)->needs_clear = 0;
