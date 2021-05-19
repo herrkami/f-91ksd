@@ -125,9 +125,11 @@ void app_app_time_display_main(uint8_t view, const app_t *app, svc_main_proc_eve
 
 	if(timers_running) {
 		uint8_t nr_running = timers_running ? svc_countdown_get_n_running() : 1;
-		if(!(td.s%6) && (td.s != timer_second_last)) {
-			ctr_idx = 0;
-			timer_second_last = td.s;
+		if(td.s != timer_second_last) {
+			if(!(td.s%(nr_running/2 + 4))) {
+				ctr_idx = 0;
+				timer_second_last = td.s;
+			}
 		}
 		if(ctr_idx < 2*nr_running){
 			uint8_t active_timers[nr_running];
