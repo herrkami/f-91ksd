@@ -280,6 +280,48 @@ static const svc_menu_item_adj_t menu_item_backlight_brightness = {
 };
 
 
+/* settings for flashlight ****************************************************/
+static int32_t flashlight_timeout_get(void *ud) {
+	return svc_flashlight_timeout_get();
+}
+
+static void flashlight_timeout_set(uint8_t dig, int8_t dir, void *user_data) {
+	int16_t inc = dir*ipow(10, dig);
+	int16_t va = svc_flashlight_timeout_get();
+	va = CLAMP(va+inc, 1, 10);
+	svc_flashlight_timeout_set(va);
+}
+
+static const svc_menu_item_adj_t menu_item_flashlight_timeout = {
+	.type = SVC_MENU_ITEM_T_ADJ,
+	.header = "ft",
+	.text = "fti",
+	.digits = 2,
+	.handler_get = flashlight_timeout_get,
+	.handler_set = flashlight_timeout_set
+};
+
+
+static int32_t flashlight_brightness_get(void *ud) {
+	return svc_flashlight_brightness_get();
+}
+
+static void flashlight_brightness_set(uint8_t dig, int8_t dir, void *user_data) {
+	int16_t va = svc_flashlight_brightness_get();
+	va = CLAMP(va+dir, 0, 3);
+	svc_flashlight_brightness_set(va);
+}
+
+static const svc_menu_item_adj_t menu_item_flashlight_brightness = {
+	.type = SVC_MENU_ITEM_T_ADJ,
+	.header = "fb",
+	.text = "fbri",
+	.digits = 1,
+	.handler_get = flashlight_brightness_get,
+	.handler_set = flashlight_brightness_set
+};
+
+
 /* settings for lcd **********************************************************/
 static uint8_t lcd_contrast = 15;
 
@@ -411,6 +453,9 @@ static const svc_menu_item_text_t *menu_items[] = {
 
 	(void*)&menu_item_backlight_brightness,
 	(void*)&menu_item_backlight_timeout,
+
+	(void*)&menu_item_flashlight_brightness,
+	(void*)&menu_item_flashlight_timeout,
 
 	(void*)&menu_item_lcd_contrast,
 

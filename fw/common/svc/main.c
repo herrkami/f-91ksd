@@ -24,7 +24,10 @@ void svc_main_proc(svc_main_proc_event_t event) {
 	if(event & SVC_MAIN_PROC_EVENT_AUX_TIMER) {
 		svc_aux_timer_handler();
 	}
-	svc_backlight_process(event);
+	if(svc_backlight_process(event)) {
+		// eat event if flashlight shall be disabled
+		event &= ~(SVC_MAIN_PROC_EVENT_KEY_ANY | SVC_MAIN_PROC_EVENT_KEY_ANY_LONG);
+	}
 	if(event & SVC_MAIN_PROC_EVENT_TICK) {
 		static uint8_t div;
 		if(!div) { /* prescale to one second */
