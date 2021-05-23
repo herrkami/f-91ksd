@@ -1,12 +1,21 @@
-AL:d=4,o=5,b=180:a5,p,a5,p,a5,p,a5,p,a5,p,a5,p,a5,p,a5,p,a5,p,a5,p,a5,p,a5,p,a5,p,a5,p,a5,p,a5,p,a5,p,a5,p,a5,p,a5,p,a5
-BG:d=4,o=5,b=125:8g#,8e,8g#,8c#6,a,p,8f#,8d#,8f#,8b,g#,8f#,8e,p,8e,8c#,f#,c#,p,8f#,8e,g#,f#,8g#,8e,8g#,8c#6,a,p,8f#,8d#,8f#,8b,g#,8f#,8e,p,8e,8c#,f#,c#,p,8f#,8e,g#,f#,8g#,8e,8g#,8c#6,a,p,8f#,8d#,8f#,8b,g#,8f#,8e,p,8e,8c#,f#,c#,p,8f#,8e,g#,f#
-SW:d=4,o=5,b=180:8f,8f,8f,2a#.,2f.6,8d#6,8d6,8c6,2a#.6,f.6,8d#6,8d6,8c6,2a#.6,f.6,8d#6,8d6,8d#6,2c6,p,8f,8f,8f,2a#.,2f.6,8d#6,8d6,8c6,2a#.6,f.6,8d#6,8d6,8c6,2a#.6,f.6,8d#6,8d6,8d#6,2c6
-CD:d=4,o=5,b=125:p,8p,16b,16a,b,e,p,8p,16c6,16b,8c6,8b,a,p,8p,16c6,16b,c6,e,p,8p,16a,16g,8a,8g,8f#,8a,g.,16f#,16g,a.,16g,16a,8b,8a,8g,8f#,e,c6,2b.,16b,16c6,16b,16a,1b
-5S:d=4,o=5,b=180:8f,8f,8f,1c#,8p,8d#,8d#,8d#,1c,8p,8f,8f,8f,8c#,8f#,8f#,8f#,8f,8c#6,8c#6,8c#6,2a#,8p,8f,8f,8f,8c,8f#,8f#,8f#,8f,8d#6,8d#6,8d#6,1c6,8f6,8f6,8d#6,8c#6,8c#,8c#,8d#,8f,8f6,8f6,8d#6,8c#6,8c#,8c#,8d#,8f,8f6,8f6,8d#6,c#6,p,a#,p,2f6
-HP:d=16,o=5,b=125:8b,8e.6,g6,8f#6,4e6,8b6,4a.6,4f#.6,8e.6,g6,8f#6,4d6,8f6,2b,8p,8b,8e.6,g6,8f#6,4e6,8b6,4d7,8c#7,4c7,8g#6,8c.7,b6,8a#6,4f#6,8g6,2e6,8p,8g6,4b6,8g6,4b6,8g6,4c7,8b6,4a#6,8f#6,8g.6,b6,8a#6,4a#,8b,2b6,8p
-PP:d=4,o=5,b=160:8d#,8e,2p,8f#,8g,2p,8d#,8e,16p,8f#,8g,16p,8c6,8b,16p,8d#,8e,16p,8b,2a#,2p,16a,16g,16e,16d,2e
-NT:d=4,o=5,b=225:8e6,8d6,f#,g#,8c#6,8b,d,e,8b,8a,c#,e,2a
-IM:d=4,o=5,b=80:8d.,8d.,8d.,8a#4,16f,8d.,8a#4,16f,d.,32p,8a.,8a.,8a.,8a#,16f,8c#.,8a#4,16f,d.,32p,8d.6,8d,16d,8d6,32p,8c#6,16c6,16b,16a#,8b,32p,16d#,8g#,32p,8g,16f#,16f,16e,8f,32p,16a#4,8c#,32p,8a#4,16c#,8f.,8d,16f,a.,32p,8d.6,8d,16d,8d6,32p,8c#6,16c6,16b,16a#,8b,32p,16d#,8g#,32p,8g,16f#,16f,16e,8f,32p,16a#4,8c#,32p,8a#4,16f,8d.,8a#4,16f,d.
-CF:d=4,o=5,b=125:g,8a#.,16g,16p,16g,8c6,8g,8f,g,8d.6,16g,16p,16g,8d#6,8d6,8a#,8g,8d6,8g6,16g,16f,16p,16f,8d,8a#,2g,p,16f6,8d6,8c6,8a#,g,8a#.,16g,16p,16g,8c6,8g,8f,g,8d.6,16g,16p,16g,8d#6,8d6,8a#,8g,8d6,8g6,16g,16f,16p,16f,8d,8a#,2g
-SH:d=32,o=5,b=900:e4,p,e4,p,e4,p,e4,p,c4,p,c4,p,c4,p,c4,p,c4,p,c4,p,c4,p,c4,p,c4,p,c4,p,c4,p,c4,p,c4,p
 --:d=4,o=5,b=100:p,p,p,p
+AL:d=4,o=5,b=180:a5,p,a5,p,a5,p,a5,p,a5,p,a5,p,a5,p,a5,p,a5,p,a5,p,a5,p,a5,p,a5,p,a5,p,a5,p,a5,p,a5,p,a5,p,a5,p,a5,p,a5
+K1:d=32,o=5,b=900:e7,p,e7,p,e7,p,e7,p,e6,p,e6,p,e6,p,e6,p,e5,p,e5,p,e5,p,e5,p,e4,p,e4,p,e4,p,e4
+K2:d=32,o=5,b=900:a7,a4,a7,a4,a7,a4,a7,a4, 4p, g7,g4,f7,f4,d7,d4,c7,c4
+K3:d=32,o=5,b=900:a7,d7,a7,d7, a7,p,a7,p,a7,p,a7,p, a7,4p,a7,4p, a7,8p, a7,16p, a7,32p, a7
+K4:d=32,o=5,b=900:a7,8p, a7,8p, a7,4p,a7,4p, a7,d7,a7,d7,a7,d7,a7,d7, a7,p,a7,p,a7,p,a7,p, a7,4p,a7,4p, a7,8p, a7
+K5:d=32,o=5,b=900:b7,32p,b7,32p,b7,16p,f7,8p,b7,4p,f7,2p,b7,1p,b7
+K6:d=8,o=5,b=900:a#7,p,a7,p,f#6
+K7:d=32,o=5,b=900:c7,d#7,c7,d#7,c7,d#7,c7,d#7, e7,a#7,e7,a#7,e7,a#7,e7,a#7
+K8:d=32,o=7,b=900:g,a,g,a,g#,a#,g#,a#,a,h,a,h,a#,b,a#,b,  g,a,g,a,g#,a#,g#,a#,a,h,a,h,a#,b,a#,b
+G0:d=32,o=7,b=900:b,8p,b,32p,b,8p,b,1p,b,4p,b,4p,b,2p,b,2p,b,4p,b,4p,b,32p,b,2p,b,1p,b,8p,b,16p,b
+G1:d=32,o=7,b=900:b,8p,b,8p,b,1p,b,8p,b,32p,b,4p,b,8p,b,1p,b,1p,b,1p,b,1p,b,2p,b,4p,b,16p,b,4p,b,2p,b,1p,b,4p,b,16p,b,2p,b,2p,b,1p,b,8p,b,8p,b,4p,b,8p,b,2p,b,16p,b,16p,b,4p,b,32p,b
+G2:d=32,o=7,b=900:b,8p,b,4p,b,32p,b,2p,b,2p,b,2p,b,8p,b,2p,b,1p,b,2p,b,8p,b,4p,b,1p,b,4p,b,32p,b,16p,b,16p,b,2p,b,32p,b,1p,b,32p,b,4p,b,4p,b,8p,b,8p,b,16p,b,2p,b,32p,b,1p,b,1p,b,8p,b,16p,b,1p,b,2p,b,2p,b,1p,b,32p,b,32p,b,1p,b,2p,b,16p,b,1p,b,1p,b,1p,b,8p,b,1p,b,2p,b,16p,b,1p,b,1p,b,16p,b,16p,b,16p,b,8p,b,4p,b,4p,b,1p,b,2p,b,16p,b,1p,b,8p,b,2p,b,8p,b
+G3:d=32,o=7,b=900:b,32p,b,4p,b,4p,b,1p,b,1p,b,2p,b,16p,b,32p,b,2p,b,1p,b,32p,b,1p,b,4p,b,8p,b,32p,b,8p,b,1p,b,8p,b,2p,b,4p,b,32p,b,4p,b,1p,b,4p,b,16p,b,16p,b,2p,b,1p,b,1p,b,4p,b,2p,b,32p,b,16p,b,4p,b,32p,b,8p,b,2p,b,16p,b,1p,b,2p,b,4p,b,1p,b,16p,b,16p,b,8p,b,4p,b,32p,b,2p,b,1p,b,8p,b,1p,b,1p,b,8p,b,2p,b,32p,b,16p,b,32p,b,4p,b,4p,b,16p,b,4p,b,1p,b,4p,b,2p,b,1p,b,2p,b,32p,b,32p,b,4p,b,16p,b,8p,b,2p,b,2p,b,1p,b,16p,b,2p,b,32p,b,4p,b,16p,b,2p,b,1p,b,32p,b,8p,b,2p,b,16p,b,32p,b,1p,b,2p,b,1p,b,4p,b,8p,b,16p,b,8p,b,1p,b,2p,b,8p,b,32p,b,16p,b,8p,b,2p,b,8p,b,32p,b,2p,b,1p,b,2p,b,32p,b,2p,b,8p,b,1p,b,8p,b,1p,b,16p,b,1p,b,4p,b,8p,b,8p,b,16p,b,2p,b,4p,b,1p,b,2p,b,8p,b,4p,b,8p,b,1p,b,1p,b,32p,b
+R0:d=32,o=7,b=900:b,4p,b
+R1:d=32,o=7,b=900:b,4p,b,4p,b
+R2:d=32,o=7,b=900:b,1p,c,1p,b
+R3:d=32,o=7,b=900:4c,32p,8b
+BG:d=4,o=5,b=125:8g#,8e,8g#,8c#6,a,p,8f#,8d#,8f#,8b,g#,8f#,8e,p,8e,8c#,f#,c#,p,8f#,8e,g#,f#,8g#,8e,8g#,8c#6,a,p,8f#,8d#,8f#,8b,g#,8f#,8e,p,8e,8c#,f#,c#,p,8f#,8e,g#,f#,8g#,8e,8g#,8c#6,a,p,8f#,8d#,8f#,8b,g#,8f#,8e,p,8e,8c#,f#,c#,p,8f#,8e,g#,f#
+NT:d=4,o=5,b=225:8e6,8d6,f#,g#,8c#6,8b,d,e,8b,8a,c#,e,2a
+CF:d=4,o=5,b=125:g,8a#.,16g,16p,16g,8c6,8g,8f,g,8d.6,16g,16p,16g,8d#6,8d6,8a#,8g,8d6,8g6,16g,16f,16p,16f,8d,8a#,2g,p,16f6,8d6,8c6,8a#,g,8a#.,16g,16p,16g,8c6,8g,8f,g,8d.6,16g,16p,16g,8d#6,8d6,8a#,8g,8d6,8g6,16g,16f,16p,16f,8d,8a#,2g

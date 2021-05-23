@@ -1,17 +1,20 @@
 # TODOs
 
 ## Todo next
-- Running counters should be visible and easy to access
-    - The |||||-symbol should blink while a counter is running ✓
-    - A popup window should show the current counter status ✓
-    - Make the routine more efficient! I.e., prevent time from being redrawn everytime when counters are running. Introduce a mode like `display_date` instead.
-- Make more parameters settable (introduce submenus maybe?)
-- Better and more LED sequences (repair that only three are shown)
-- Add flashlight app for case led
+- Add metronome clicks for pulsar mode
+- Better and more LED sequences
+- Better and more melodies
 - Add breathing app
 - BUG: Switching time zone affects seconds
-- Limit brightness to only four stages
-- Countdowns should be derived from RTC actually (svc_countdown_dec())
+
+- Limit brightness to only four stages ✓
+- Countdowns should be derived from RTC actually (svc_countdown_dec())?
+- Add flashlight app for case led ✓
+    - Eat event if flashlight is disabled by click ✓
+- Running counters should be visible and easy to access ✓
+    - The |||||-symbol should blink while a counter is running ✓
+    - A popup window should show the current counter status ✓
+    - Make the routine more efficient! I.e., prevent time from being redrawn everytime when counters are running. Introduce a mode like `display_date` instead. ✓
 
 - Fix the melody sound bug: releasing pending timers should also stop sounds ✓
 - Get default BPM from pulsar sequences for alarms ✓

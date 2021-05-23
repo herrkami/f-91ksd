@@ -110,6 +110,9 @@ uint8_t svc_backlight_process(svc_main_proc_event_t ev) {
 			timer--;
 			if(timer == 0) {
 				state = STATE_OFF;
+				// This prevent artifacts 
+				svc_flash_caseled_timed(0, fl_brightness);
+				svc_flash_backled_timed(0, bl_brightness);
 			}
 		}
 	}
