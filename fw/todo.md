@@ -2,10 +2,13 @@
 
 ## Todo next
 - Add metronome clicks for pulsar mode
-- Better and more LED sequences
-- Better and more melodies
-- Add breathing app
+- Fix second adjustment
+- Fix calibration routine
 - BUG: Switching time zone affects seconds
+- Better and more LED sequences
+    - Make sequences ordered by signature
+- Add breathing app
+- Better and more melodies
 
 - Limit brightness to only four stages ✓
 - Countdowns should be derived from RTC actually (svc_countdown_dec())?

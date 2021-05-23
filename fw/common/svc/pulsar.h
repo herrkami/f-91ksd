@@ -53,5 +53,20 @@ uint16_t svc_pulsar_interval_avg_get(void);
 uint32_t svc_pulsar_clk_counter_total_get(void);
 uint16_t svc_pulsar_clk_counter_max_get(void);
 
+uint8_t svc_pulsar_bp_beat_state_get(void);
+void svc_pulsar_bp_beat_state_set(uint8_t state);
+uint16_t svc_pulsar_bp_beat_freq_get(void);
+void svc_pulsar_bp_beat_freq_set(uint16_t freq);
+uint8_t svc_pulsar_bp_beat_dur_get(void);
+void svc_pulsar_bp_beat_dur_set(uint8_t dur);
+uint8_t svc_pulsar_bp_bar_state_get(void);
+void svc_pulsar_bp_bar_state_set(uint8_t state);
+uint16_t svc_pulsar_bp_bar_signature_get(void);
+void svc_pulsar_bp_bar_signature_set(uint16_t signature);
+uint16_t svc_pulsar_bp_bar_freq_get(void);
+void svc_pulsar_bp_bar_freq_set(uint16_t freq);
+uint8_t svc_pulsar_bp_bar_dur_get(void);
+void svc_pulsar_bp_bar_dur_set(uint8_t dur);
+
 // void svc_pulsar_default_set(uint8_t pulsar_idx);
 // uint8_t svc_pulsar_default_get(void);

@@ -2,6 +2,7 @@
 #include "common/hal/hal.h"
 #include "aux_timer.h"
 #include "platform.h"
+#include "beep.h"
 #include "leds.h"
 #include "util.h"
 
@@ -20,6 +21,18 @@ static uint16_t clk_counter_max;
 static uint32_t clk_counter_total;
 static uint16_t tap_counter;
 static uint32_t interval_avg;
+
+// Metronome beat
+static uint8_t SECTION_INFOMEM bp_beat_state = 1;
+static uint16_t SECTION_INFOMEM bp_beat_freq = 8000;
+static uint8_t SECTION_INFOMEM bp_beat_dur = 1;
+
+static uint8_t SECTION_INFOMEM bp_bar_state = 1;
+static uint16_t SECTION_INFOMEM bp_bar_signature = 4;
+static uint16_t SECTION_INFOMEM bp_bar_freq = 9000;
+static uint8_t SECTION_INFOMEM bp_bar_dur = 1;
+static uint8_t bp_bar_cnt = 0;
+static uint64_t bp_phi_next = 0;
 
 
 uint64_t svc_pulsar_hbpm_to_dphi(uint16_t hbpm) {
@@ -77,7 +90,7 @@ void svc_aux_timer_pulsar_pulse_handler(void) {
     if(frame_cur) {
         // Duration of the last frame is always 0
         if(frame_cur->duration == 0) {
-    		if(repeat != 255) { /* repeat==255 -> repeat infinite */
+    		if(repeat != 255) {
     			repeat--;
     		}
     		if(repeat) {
@@ -90,16 +103,36 @@ void svc_aux_timer_pulsar_pulse_handler(void) {
     	else {
             pulsar_phi += pulsar_dphi;
             if (pulsar_phi >= pulsar_phinext) {
+                // Call flashes
                 svc_flash_rightled_timed(frame_cur->led0, 4);
                 svc_flash_caseled_timed(frame_cur->led1, 4);
+
+                // Pulsar state keeping
                 uint8_t div = frame_cur->duration ? frame_cur->duration : 1;
                 pulsar_phinext += SVC_PULSAR_PHI_MAX/div;
                 frame_cur++;
+            }
+            if(pulsar_phi >= bp_phi_next) {
+                // Metronome beep
+                if(bp_beat_state) {
+                    svc_beep_timed(bp_beat_freq, bp_beat_dur);
+                }
+                if(bp_bar_state) {
+                    if(bp_bar_cnt >= bp_bar_signature) {
+                        svc_beep_timed(bp_bar_freq, bp_bar_dur);
+                        bp_bar_cnt = 0;
+                    }
+                    bp_bar_cnt++;
+                }
+                bp_phi_next += SVC_PULSAR_PHI_MAX/4;
             }
             if (pulsar_phi >= SVC_PULSAR_PHI_MAX) {
                 pulsar_phi -= SVC_PULSAR_PHI_MAX;
                 if (pulsar_phinext >= SVC_PULSAR_PHI_MAX) {
                     pulsar_phinext -= SVC_PULSAR_PHI_MAX;
+                }
+                if (bp_phi_next >= SVC_PULSAR_PHI_MAX) {
+                    bp_phi_next -= SVC_PULSAR_PHI_MAX;
                 }
             }
     	}
@@ -274,4 +307,61 @@ uint32_t svc_pulsar_clk_counter_total_get(void) {
 
 uint16_t svc_pulsar_clk_counter_max_get(void) {
     return clk_counter_max;
+}
+
+
+uint8_t svc_pulsar_bp_beat_state_get(void) {
+    return bp_beat_state;
+}
+
+void svc_pulsar_bp_beat_state_set(uint8_t state) {
+    bp_beat_state = state;
+}
+
+uint16_t svc_pulsar_bp_beat_freq_get(void) {
+    return bp_beat_freq;
+}
+
+void svc_pulsar_bp_beat_freq_set(uint16_t freq) {
+    bp_beat_freq = freq;
+}
+
+uint8_t svc_pulsar_bp_beat_dur_get(void) {
+    return bp_beat_dur;
+}
+
+void svc_pulsar_bp_beat_dur_set(uint8_t dur) {
+    bp_beat_dur = dur;
+}
+
+uint8_t svc_pulsar_bp_bar_state_get(void) {
+    return bp_bar_state;
+}
+
+void svc_pulsar_bp_bar_state_set(uint8_t state) {
+    bp_bar_state = state;
+}
+
+uint16_t svc_pulsar_bp_bar_signature_get(void) {
+    return bp_bar_signature;
+}
+
+void svc_pulsar_bp_bar_signature_set(uint16_t signature) {
+    bp_bar_signature = signature;
+}
+
+uint16_t svc_pulsar_bp_bar_freq_get(void) {
+    return bp_bar_freq;
+}
+
+void svc_pulsar_bp_bar_freq_set(uint16_t freq) {
+    bp_bar_freq = freq;
+}
+
+uint8_t svc_pulsar_bp_bar_dur_get(void) {
+    return bp_bar_dur;
+}
+
+void svc_pulsar_bp_bar_dur_set(uint8_t dur) {
+    bp_bar_dur = dur;
 }

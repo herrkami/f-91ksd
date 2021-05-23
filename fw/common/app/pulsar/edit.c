@@ -116,10 +116,168 @@ static svc_menu_item_choice_t menu_item_sequence = {
 	.handler_draw = sequence_draw,
 };
 
+
+// Metronome
+static uint8_t bp_beat_state_get(void *ud) {
+    return svc_pulsar_bp_beat_state_get();
+}
+
+static void bp_beat_state_set(uint8_t choice, void *ud) {
+	svc_pulsar_bp_beat_state_set(choice);
+}
+
+static const svc_menu_item_choice_t menu_item_bp_beat_enable = {
+	.type = SVC_MENU_ITEM_T_CHOICE,
+	.text = " pue",
+	.choice_pos = 4,
+	.n_choices = 2,
+	.choices = {
+		"of",
+		"on",
+	},
+	.handler_set = bp_beat_state_set,
+	.handler_get = bp_beat_state_get
+};
+
+
+static int32_t bp_beat_freq_get(void *ud) {
+    return svc_pulsar_bp_beat_freq_get();
+}
+
+static void bp_beat_freq_set(uint8_t dig, int8_t dir, void *user_data) {
+	int16_t inc = dir*ipow(10, dig);
+	int16_t va = svc_pulsar_bp_beat_freq_get();
+	va = CLAMP(va+inc, 400, 20000);
+	svc_pulsar_bp_beat_freq_set(va);
+}
+
+static const svc_menu_item_adj_t menu_item_bp_beat_freq = {
+	.type = SVC_MENU_ITEM_T_ADJ,
+	.header = "bt",
+	.text = " puf",
+	.digits = 5,
+	.handler_get = bp_beat_freq_get,
+	.handler_set = bp_beat_freq_set
+};
+
+
+static int32_t bp_beat_dur_get(void *ud) {
+    return svc_pulsar_bp_beat_dur_get();
+}
+
+static void bp_beat_dur_set(uint8_t dig, int8_t dir, void *user_data) {
+	int16_t inc = dir*ipow(10, dig);
+	int16_t va = svc_pulsar_bp_beat_dur_get();
+	va = CLAMP(va+inc, 1, 100);
+	svc_pulsar_bp_beat_dur_set(va);
+}
+
+static const svc_menu_item_adj_t menu_item_bp_beat_dur = {
+	.type = SVC_MENU_ITEM_T_ADJ,
+	.header = "bt",
+	.text = " pud",
+	.digits = 3,
+	.handler_get = bp_beat_dur_get,
+	.handler_set = bp_beat_dur_set
+};
+
+
+static uint8_t bp_bar_state_get(void *ud) {
+    return svc_pulsar_bp_bar_state_get();
+}
+
+static void bp_bar_state_set(uint8_t choice, void *ud) {
+	svc_pulsar_bp_bar_state_set(choice);
+}
+
+static const svc_menu_item_choice_t menu_item_bp_bar_enable = {
+	.type = SVC_MENU_ITEM_T_CHOICE,
+	.text = " bae",
+	.choice_pos = 4,
+	.n_choices = 2,
+	.choices = {
+		"of",
+		"on",
+	},
+	.handler_set = bp_bar_state_set,
+	.handler_get = bp_bar_state_get
+};
+
+
+static int32_t bp_bar_freq_get(void *ud) {
+    return svc_pulsar_bp_bar_freq_get();
+}
+
+static void bp_bar_freq_set(uint8_t dig, int8_t dir, void *user_data) {
+	int16_t inc = dir*ipow(10, dig);
+	int16_t va = svc_pulsar_bp_bar_freq_get();
+	va = CLAMP(va+inc, 400, 20000);
+	svc_pulsar_bp_bar_freq_set(va);
+}
+
+static const svc_menu_item_adj_t menu_item_bp_bar_freq = {
+	.type = SVC_MENU_ITEM_T_ADJ,
+	.header = "bt",
+	.text = " baf",
+	.digits = 5,
+	.handler_get = bp_bar_freq_get,
+	.handler_set = bp_bar_freq_set
+};
+
+
+static int32_t bp_bar_dur_get(void *ud) {
+    return svc_pulsar_bp_bar_dur_get();
+}
+
+static void bp_bar_dur_set(uint8_t dig, int8_t dir, void *user_data) {
+	int16_t inc = dir*ipow(10, dig);
+	int16_t va = svc_pulsar_bp_bar_dur_get();
+	va = CLAMP(va+inc, 1, 100);
+	svc_pulsar_bp_bar_dur_set(va);
+}
+
+static const svc_menu_item_adj_t menu_item_bp_bar_dur = {
+	.type = SVC_MENU_ITEM_T_ADJ,
+	.header = "bt",
+	.text = " bad",
+	.digits = 3,
+	.handler_get = bp_bar_dur_get,
+	.handler_set = bp_bar_dur_set
+};
+
+
+static int32_t bp_signature_get(void *ud) {
+    return svc_pulsar_bp_bar_signature_get();
+}
+
+static void bp_signature_set(uint8_t dig, int8_t dir, void *user_data) {
+	int16_t inc = dir*ipow(10, dig);
+	int16_t va = svc_pulsar_bp_bar_signature_get();
+	va = CLAMP(va+inc, 1, 1024);
+	svc_pulsar_bp_bar_signature_set(va);
+}
+
+static const svc_menu_item_adj_t menu_item_bp_signature = {
+	.type = SVC_MENU_ITEM_T_ADJ,
+	.header = "bt",
+	.text = " sig",
+	.digits = 4,
+	.handler_get = bp_signature_get,
+	.handler_set = bp_signature_set
+};
+
+
 static const svc_menu_item_unknown_t *menu_items[] = {
 	(void*)&menu_item_start_stop,
 	(void*)&menu_item_hbpm,
 	(void*)&menu_item_sequence,
+	(void*)&menu_item_bp_beat_enable,
+	(void*)&menu_item_bp_beat_freq,
+	(void*)&menu_item_bp_beat_dur,
+	(void*)&menu_item_bp_bar_enable,
+	(void*)&menu_item_bp_bar_freq,
+	(void*)&menu_item_bp_bar_dur,
+	(void*)&menu_item_bp_signature,
 };
 
 static const svc_menu_t menu = {
