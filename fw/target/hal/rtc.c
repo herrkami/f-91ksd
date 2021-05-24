@@ -33,11 +33,15 @@ void hal_rtc_get(hal_rtc_timedate_t *result)
 void hal_rtc_set_time(hal_rtc_timedate_t *time)
 {
 	RTC_LOCK {
-		RTCCTL0_L &= ~RTCRDYIE_L; /* lock the interrupt for readout */
+		RTCCTL0_L &= ~RTCRDYIE_L;  // lock the interrupt for readout
 		RTCCTL1 |= RTCHOLD;
+		uint16_t rt0ps = RT0PS;
+		uint16_t rt1ps = RT1PS;
 		RTCHOUR = time->h;
 		RTCMIN = time->m;
 		RTCSEC = time->s;
+		RT0PS = rt0ps;
+		RT1PS = rt1ps;
 		RTCCTL1 &= ~RTCHOLD;
 		RTCCTL0_L |= RTCRDYIE_L;
 	}
@@ -66,10 +70,14 @@ void hal_rtc_set_date(hal_rtc_timedate_t *date)
 	RTC_LOCK {
 		RTCCTL0_L &= ~RTCRDYIE; /* lock the interrupt for readout */
 		RTCCTL1 |= RTCHOLD;
+		uint16_t rt0ps = RT0PS;
+		uint16_t rt1ps = RT1PS;
 		RTCDAY = date->dom;
 		RTCMON = date->month;
 		RTCYEAR = date->year;
 		RTCDOW = wday(date->year, date->month, date->dom);
+		RT0PS = rt0ps;
+		RT1PS = rt1ps;
 		RTCCTL1 &= ~RTCHOLD;
 		RTCCTL0_L |= RTCRDYIE;
 	}

@@ -17,7 +17,7 @@
 - Running counters should be visible and easy to access ✓
     - The |||||-symbol should blink while a counter is running ✓
     - A popup window should show the current counter status ✓
-    - Make the routine more efficient! I.e., prevent time from being redrawn everytime when counters are running. Introduce a mode like `display_date` instead. ✓
+    - Make the routine more efficient! I.e., prevent time from being redrawn every time when counters are running. Introduce a mode like `display_date` instead. ✓
 
 - Fix the melody sound bug: releasing pending timers should also stop sounds ✓
 - Get default BPM from pulsar sequences for alarms ✓
