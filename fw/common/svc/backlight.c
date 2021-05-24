@@ -46,24 +46,6 @@ uint8_t svc_flashlight_timeout_get(void) {
 	return fl_timeout;
 }
 
-// void svc_backlight_process(svc_main_proc_event_t ev) {
-// 	if(ev & SVC_MAIN_PROC_EVENT_KEY_UP_LONG) {
-// 		timer = bl_timeout*4;
-// 		hal_backlight_set(bl_brightness);
-// 	}
-// 	if((ev & (SVC_MAIN_PROC_EVENT_KEY_ANY | SVC_MAIN_PROC_EVENT_KEY_ANY_LONG)) && timer) {
-// 		timer = bl_timeout*4;
-// 	}
-//
-// 	if(ev & SVC_MAIN_PROC_EVENT_TICK) { //decrement
-// 		if(timer) {
-// 			timer--;
-// 		}
-// 		else {
-// 			hal_backlight_set(0);
-// 		}
-// 	}
-// }
 uint8_t svc_backlight_process(svc_main_proc_event_t ev) {
 	if(ev & SVC_MAIN_PROC_EVENT_KEY_UP_LONG) {
 		if(state == STATE_OFF) {
@@ -72,16 +54,12 @@ uint8_t svc_backlight_process(svc_main_proc_event_t ev) {
 			state = STATE_BACKLIGHT;
 		}
 		else if(state == STATE_BACKLIGHT) {
-			timer = bl_timeout*4;
+			timer = fl_timeout*4;
 			svc_flash_backled_timed(0, bl_brightness);
 			svc_flash_caseled_timed(fl_timeout*128, fl_brightness);
 			state = STATE_FLASHLIGHT;
 		}
 		else if(state == STATE_FLASHLIGHT) {
-			// timer = bl_timeout*4;
-			// svc_flash_caseled_timed(0, fl_brightness);
-			// svc_flash_backled_timed(bl_timeout*128, bl_brightness);
-			// state = STATE_BACKLIGHT;
 			timer = 0;
 			svc_flash_caseled_timed(0, fl_brightness);
 			state = STATE_OFF;
@@ -97,9 +75,6 @@ uint8_t svc_backlight_process(svc_main_proc_event_t ev) {
 			case STATE_FLASHLIGHT:
 				timer = fl_timeout*4;
 				svc_flash_caseled_timed(fl_timeout*128, fl_brightness);
-				// timer = 0;
-				// svc_flash_caseled_timed(0, fl_brightness);
-				// state = STATE_OFF;
 				return 1;
 			break;
 		}
@@ -110,7 +85,7 @@ uint8_t svc_backlight_process(svc_main_proc_event_t ev) {
 			timer--;
 			if(timer == 0) {
 				state = STATE_OFF;
-				// This prevent artifacts 
+				// This prevents artifacts
 				svc_flash_caseled_timed(0, fl_brightness);
 				svc_flash_backled_timed(0, bl_brightness);
 			}
