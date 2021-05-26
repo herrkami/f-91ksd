@@ -124,7 +124,7 @@ void svc_aux_timer_pulsar_pulse_handler(void) {
                     }
                     bp_bar_cnt++;
                 }
-                bp_phi_next += SVC_PULSAR_PHI_MAX/4;
+                bp_phi_next += SVC_PULSAR_PHI_MAX;
             }
             if (pulsar_phi >= SVC_PULSAR_PHI_MAX) {
                 pulsar_phi -= SVC_PULSAR_PHI_MAX;
