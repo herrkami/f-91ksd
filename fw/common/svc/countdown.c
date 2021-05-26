@@ -123,6 +123,8 @@ void svc_countdown_process(void) {
 		for(uint8_t i=0; i<svc_countdowns_n; i++) {
 			// if(svc_countdown_dec(&(svc_countdowns[i]))) {
 			if(svc_countdown_dec(i)) {
+				// Make sure metronome is off
+				svc_pulsar_bp_metronome_set_enable(0);
 				svc_melody_play_repeat(
 					svc_countdowns[i].melody, svc_melody_alarm_repetitions_get());
 				svc_pulsar_play_repeat(

@@ -15,6 +15,9 @@ static void main(uint8_t view, const app_t *app, svc_main_proc_event_t event) {
     else if (event & SVC_MAIN_PROC_EVENT_KEY_UP) {
         svc_pulsar_measure_tap_handler();
     }
+    else if (event & SVC_MAIN_PROC_EVENT_KEY_ENTER_LONG) {
+        svc_pulsar_bp_metronome_set_enable(!svc_pulsar_bp_metronome_get_enable());
+    }
     uint16_t hbpm = svc_pulsar_hbpm_get();
     svc_lcd_puti(1, 5, hbpm);
     // svc_lcd_puti(1, 5, svc_pulsar_interval_avg_get());

@@ -25,14 +25,15 @@ static uint32_t interval_avg;
 // Metronome beat
 static uint8_t SECTION_INFOMEM bp_beat_state = 1;
 static uint16_t SECTION_INFOMEM bp_beat_freq = 8000;
-static uint8_t SECTION_INFOMEM bp_beat_dur = 1;
+static uint8_t SECTION_INFOMEM bp_beat_dur = 4;
 
 static uint8_t SECTION_INFOMEM bp_bar_state = 1;
 static uint16_t SECTION_INFOMEM bp_bar_signature = 4;
 static uint16_t SECTION_INFOMEM bp_bar_freq = 9000;
-static uint8_t SECTION_INFOMEM bp_bar_dur = 1;
+static uint8_t SECTION_INFOMEM bp_bar_dur = 4;
+static uint8_t SECTION_INFOMEM bp_metronome_en = 0;
 static uint8_t bp_bar_cnt = 0;
-static uint64_t bp_phi_next = 0;
+static uint64_t bp_phinext = 0;
 
 
 uint64_t svc_pulsar_hbpm_to_dphi(uint16_t hbpm) {
@@ -112,27 +113,29 @@ void svc_aux_timer_pulsar_pulse_handler(void) {
                 pulsar_phinext += SVC_PULSAR_PHI_MAX/div;
                 frame_cur++;
             }
-            if(pulsar_phi >= bp_phi_next) {
-                // Metronome beep
-                if(bp_beat_state) {
-                    svc_beep_timed(bp_beat_freq, bp_beat_dur);
-                }
-                if(bp_bar_state) {
-                    if(bp_bar_cnt >= bp_bar_signature) {
-                        svc_beep_timed(bp_bar_freq, bp_bar_dur);
-                        bp_bar_cnt = 0;
+            if(pulsar_phi >= bp_phinext) {
+                if(bp_metronome_en) {
+                    // Metronome beep
+                    if(bp_beat_state) {
+                        svc_beep_timed(bp_beat_freq, bp_beat_dur);
                     }
-                    bp_bar_cnt++;
+                    if(bp_bar_state) {
+                        if(++bp_bar_cnt >= bp_bar_signature) {
+                            svc_beep_timed(bp_bar_freq, bp_bar_dur);
+                            bp_bar_cnt = 0;
+                        }
+                        // bp_bar_cnt++;
+                    }
                 }
-                bp_phi_next += SVC_PULSAR_PHI_MAX;
+                bp_phinext += SVC_PULSAR_PHI_MAX;
             }
             if (pulsar_phi >= SVC_PULSAR_PHI_MAX) {
                 pulsar_phi -= SVC_PULSAR_PHI_MAX;
                 if (pulsar_phinext >= SVC_PULSAR_PHI_MAX) {
                     pulsar_phinext -= SVC_PULSAR_PHI_MAX;
                 }
-                if (bp_phi_next >= SVC_PULSAR_PHI_MAX) {
-                    bp_phi_next -= SVC_PULSAR_PHI_MAX;
+                if (bp_phinext >= SVC_PULSAR_PHI_MAX) {
+                    bp_phinext -= SVC_PULSAR_PHI_MAX;
                 }
             }
     	}
@@ -149,11 +152,13 @@ void svc_pulsar_reset_phase(void) {
 
 
 void _svc_pulsar_play_repeat(uint8_t rep) {
-    frame_cur = svc_pulsar_seqs[pulsar_seq].frames;
     frame_start = svc_pulsar_seqs[pulsar_seq].frames;
+    frame_cur = svc_pulsar_seqs[pulsar_seq].frames;
     pulsar_phi = SVC_PULSAR_PHI_MAX;
     uint8_t div = frame_cur->duration ? frame_cur->duration : 1;
     pulsar_phinext = SVC_PULSAR_PHI_MAX/div;
+    bp_phinext = SVC_PULSAR_PHI_MAX;
+    bp_bar_cnt = 0;
     repeat = (!rep)?255:rep;
 	svc_aux_timer_set_required(SVC_AUX_TIMER_REQUIRED_PULSAR_PULSE, 1);
 }
@@ -365,3 +370,11 @@ uint8_t svc_pulsar_bp_bar_dur_get(void) {
 void svc_pulsar_bp_bar_dur_set(uint8_t dur) {
     bp_bar_dur = dur;
 }
+
+void svc_pulsar_bp_metronome_set_enable(uint8_t state) {
+    bp_metronome_en = state;
+}
+
+uint8_t svc_pulsar_bp_metronome_get_enable(void) {
+    return bp_metronome_en;
+};

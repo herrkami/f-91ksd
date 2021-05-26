@@ -103,6 +103,8 @@ void svc_alarm_process(void) {
 	if(td.m != min_last) {
 		for(uint8_t i=0; i<svc_alarms_n; i++) {
 			if(svc_alarm_match(&(svc_alarms[i]), &td)) {
+				// Make sure metronome is off
+				svc_pulsar_bp_metronome_set_enable(0);
 				svc_melody_play_repeat(
 					svc_alarms[i].melody, svc_melody_alarm_repetitions_get());
 				svc_pulsar_play_repeat(

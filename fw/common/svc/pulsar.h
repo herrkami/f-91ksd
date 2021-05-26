@@ -67,6 +67,8 @@ uint16_t svc_pulsar_bp_bar_freq_get(void);
 void svc_pulsar_bp_bar_freq_set(uint16_t freq);
 uint8_t svc_pulsar_bp_bar_dur_get(void);
 void svc_pulsar_bp_bar_dur_set(uint8_t dur);
+void svc_pulsar_bp_metronome_set_enable(uint8_t state);
+uint8_t svc_pulsar_bp_metronome_get_enable(void);
 
 // void svc_pulsar_default_set(uint8_t pulsar_idx);
 // uint8_t svc_pulsar_default_get(void);
