@@ -66,8 +66,7 @@ void svc_aux_timer_rightled_handler(void) {
 		// svc_aux_timer_set_required(SVC_AUX_TIMER_REQUIRED_RIGHTLED, 0);
         svc_led_timer_set_required(SVC_LEDS_RIGHTLED, 0);
 	}
-    counter++;
-    counter %= 4;
+    counter = (counter + 1) & 0b11;
 }
 
 void svc_flash_caseled_timed(uint16_t duration, uint8_t brightness) {
@@ -100,8 +99,7 @@ void svc_aux_timer_caseled_handler(void) {
 		// svc_aux_timer_set_required(SVC_AUX_TIMER_REQUIRED_CASELED, 0);
         svc_led_timer_set_required(SVC_LEDS_CASELED, 0);
 	}
-    counter++;
-    counter %= 4;
+    counter = (counter + 1) & 0b11;
 }
 
 void svc_flash_backled_timed(uint16_t duration, uint8_t brightness) {
@@ -134,8 +132,7 @@ void svc_aux_timer_backled_handler(void) {
 		// svc_aux_timer_set_required(SVC_AUX_TIMER_REQUIRED_RIGHTLED, 0);
         svc_led_timer_set_required(SVC_LEDS_BACKLED, 0);
 	}
-    counter++;
-    counter %= 4;
+    counter = (counter + 1) & 0b11;
 }
 
 void svc_aux_timer_leds_handler(void) {
