@@ -2,14 +2,16 @@
 
 ## Todo next
 - Add metronome clicks for pulsar mode
-- Fix second adjustment
 - Fix calibration routine
-- BUG: Switching time zone affects seconds
 - Better and more LED sequences
     - Make sequences ordered by signature
 - Add breathing app
 - Better and more melodies
+- hour beep_hour_quiet defines that hour beep should be off during night time
 
+
+- BUG: Switching time zone affects seconds ✓
+- Fix second adjustment ✓
 - Limit brightness to only four stages ✓
 - Countdowns should be derived from RTC actually (svc_countdown_dec())?
 - Add flashlight app for case led ✓
@@ -22,26 +24,6 @@
 - Fix the melody sound bug: releasing pending timers should also stop sounds ✓
 - Get default BPM from pulsar sequences for alarms ✓
 - Preset alarms with historic points in time ✓
-
-
-
-## Features
-- Time
-    - Seconds should not be settable. Instead clicking on seconds should reset them to 0 like in the original Casio ✓
-- Restructure menus
-    - Add config menu by long up press ✓
-    - Indicate which menu we are in with blinking top header ✓
-    - Long enter press in main view of any app should always redirect to time ✓
-- Timers
-    - There is only one pending timer at a time
-- Add pulsar mode (blinky blinky) ✓
-    - BPM capture by button press ✓
-- Alarms ✓
-    - Add light as alarm signal ✓
-- Breathing app
-- Remove OTP ✓
-- Chrono
-    - Read from RTC!
 
 
 ### Pulsar app

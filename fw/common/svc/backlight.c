@@ -6,7 +6,7 @@
 static uint8_t SECTION_INFOMEM bl_brightness = 1;
 static uint8_t SECTION_INFOMEM bl_timeout = 3;
 static uint8_t SECTION_INFOMEM fl_brightness = 1;
-static uint8_t SECTION_INFOMEM fl_timeout = 3;
+static uint8_t SECTION_INFOMEM fl_timeout = 8;
 static uint8_t timer;
 static uint8_t state;
 

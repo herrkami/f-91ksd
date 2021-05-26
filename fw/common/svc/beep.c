@@ -30,9 +30,9 @@ void svc_aux_timer_beep_handler(void) {
 	}
 }
 
-static uint16_t SECTION_INFOMEM beep_key_freq = 550;
+static uint16_t SECTION_INFOMEM beep_key_freq = 9999;
 static uint8_t  SECTION_INFOMEM beep_key_enable = 0;
-static uint16_t SECTION_INFOMEM beep_key_duration = 5;
+static uint16_t SECTION_INFOMEM beep_key_duration = 1;
 
 void svc_beep_key(void) {
 	svc_melody_stop();
@@ -42,9 +42,9 @@ void svc_beep_key(void) {
 	}
 }
 
-static uint16_t SECTION_INFOMEM beep_hour_freq = 2000;
+static uint16_t SECTION_INFOMEM beep_hour_freq = 9999;
 static uint8_t  SECTION_INFOMEM beep_hour_enable = 1;
-static uint16_t SECTION_INFOMEM beep_hour_duration = 10;
+static uint16_t SECTION_INFOMEM beep_hour_duration = 7;
 static uint8_t  SECTION_INFOMEM beep_hour_quiet_enable = 0;
 static uint8_t  SECTION_INFOMEM beep_hour_quiet[2] = {21, 06};
 

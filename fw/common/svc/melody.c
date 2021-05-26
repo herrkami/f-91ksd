@@ -72,7 +72,7 @@ void svc_aux_timer_melody_handler(void) {
 	}
 }
 
-static uint8_t SECTION_INFOMEM alarm_repetitions = 10;
+static uint8_t SECTION_INFOMEM alarm_repetitions = 13;
 
 uint8_t svc_melody_alarm_repetitions_get(void) {
 	return alarm_repetitions;
