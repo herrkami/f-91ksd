@@ -6,6 +6,7 @@
 
 extern void app_app_alarm_edit_main(uint8_t view, const app_t *app, svc_main_proc_event_t event);
 extern void app_app_alarm_days_main(uint8_t view, const app_t *app, svc_main_proc_event_t event);
+extern void app_app_alarm_save_time_main(uint8_t view, const app_t *app, svc_main_proc_event_t event);
 
 typedef struct {
 	APP_PRIV_COMMON

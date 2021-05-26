@@ -36,6 +36,9 @@ static void main(uint8_t view, const app_t *app, svc_main_proc_event_t event) {
 	if(event & SVC_MAIN_PROC_EVENT_KEY_ENTER) {
 		app_set_view(app, 1);
 	}
+	if(event & SVC_MAIN_PROC_EVENT_KEY_ENTER_LONG) {
+		app_set_view(app, 3);
+	}
 }
 
 static app_view_t views[] = {
@@ -47,6 +50,9 @@ static app_view_t views[] = {
 	},
 	{
 		.main = app_app_alarm_days_main
+	},
+	{
+		.main = app_app_alarm_save_time_main
 	}
 };
 

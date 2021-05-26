@@ -1,13 +1,15 @@
 # TODOs
 
 ## Todo next
-- Add metronome clicks for pulsar mode
 - Fix calibration routine
+- Special function for alarms:
+    - set current time and day as alarm ✓
 - Better and more LED sequences
     - Make sequences ordered by signature
 - Add breathing app
-- Better and more melodies
+- Better and more melodies ✓
 - hour beep_hour_quiet defines that hour beep should be off during night time
+- Add metronome clicks for pulsar mode ✓
 
 
 - BUG: Switching time zone affects seconds ✓
