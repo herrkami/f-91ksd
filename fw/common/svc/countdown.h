@@ -18,6 +18,7 @@ typedef enum {
 	uint8_t melody; \
 	uint8_t pulsar; \
 	uint8_t successor; \
+	uint8_t metronome; \
 
 typedef struct {
 	SVC_COUNTDOWN_COMMON
@@ -40,4 +41,5 @@ void svc_countdown_clear_pending(void);
 void svc_countdown_set_melody(uint8_t index, uint8_t melody);
 void svc_countdown_set_pulsar(uint8_t index, uint8_t pulsar);
 void svc_countdown_set_successor(uint8_t index, uint8_t successor);
+void svc_countdown_set_metronome(uint8_t index, uint8_t state);
 void svc_countdown_draw_popup(void);

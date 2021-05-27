@@ -229,6 +229,38 @@ static svc_menu_item_choice_t menu_item_pulsar = {
 	.handler_draw = pulsar_draw,
 };
 
+
+// Metronome enable
+
+static uint8_t metronome_get(void *ud) {
+	svc_countdown_t cd;
+	svc_countdown_get(PRIV(app_current)->countdown_current, &cd);
+	return cd.metronome;
+}
+
+static void metronome_set(uint8_t choice, void *ud) {
+	svc_countdown_set_metronome(PRIV(app_current)->countdown_current, choice);
+}
+
+static void draw_current(svc_menu_state_t *state, svc_menu_item_unknown_t *item, void *user_data) {
+	svc_lcd_puti(6, 2, PRIV(app_current)->countdown_current);
+}
+
+static const svc_menu_item_choice_t menu_item_metronome = {
+	.type = SVC_MENU_ITEM_T_CHOICE,
+	.text = " met",
+	.choice_pos = 4,
+	.n_choices = 2,
+	.choices = {
+		"of",
+		"on",
+	},
+	.handler_set = metronome_set,
+	.handler_get = metronome_get,
+	.handler_draw = draw_current
+};
+
+
 // General
 
 static const svc_menu_item_unknown_t *menu_items[] = {
@@ -236,7 +268,8 @@ static const svc_menu_item_unknown_t *menu_items[] = {
 	(void*)&menu_item_time,
 	(void*)&menu_item_melody,
 	(void*)&menu_item_pulsar,
-	(void*)&menu_item_successor
+	(void*)&menu_item_successor,
+	(void*)&menu_item_metronome
 };
 
 static const svc_menu_t menu = {

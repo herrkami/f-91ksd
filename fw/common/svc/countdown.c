@@ -124,7 +124,7 @@ void svc_countdown_process(void) {
 			// if(svc_countdown_dec(&(svc_countdowns[i]))) {
 			if(svc_countdown_dec(i)) {
 				// Make sure metronome is off
-				svc_pulsar_bp_metronome_set_enable(0);
+				svc_pulsar_bp_metronome_set_enable(svc_countdowns[i].metronome);
 				svc_melody_play_repeat(
 					svc_countdowns[i].melody, svc_melody_alarm_repetitions_get());
 				svc_pulsar_play_repeat(
@@ -189,4 +189,8 @@ void svc_countdown_set_pulsar(uint8_t index, uint8_t pulsar) {
 
 void svc_countdown_set_successor(uint8_t index, uint8_t successor) {
 	svc_countdowns[index].successor = successor;
+}
+
+void svc_countdown_set_metronome(uint8_t index, uint8_t state) {
+	svc_countdowns[index].metronome = state;
 }

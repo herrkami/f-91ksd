@@ -67,6 +67,10 @@ void svc_alarm_set_pulsar(uint8_t index, uint8_t pulsar) {
 	svc_alarms[index].pulsar = pulsar;
 }
 
+void svc_alarm_set_metronome(uint8_t index, uint8_t state) {
+	svc_alarms[index].metronome = state;
+}
+
 uint8_t svc_alarm_get_any_enabled(void) {
 	return !!(alarm_flags & AF_ENABLED);
 }
@@ -103,8 +107,7 @@ void svc_alarm_process(void) {
 	if(td.m != min_last) {
 		for(uint8_t i=0; i<svc_alarms_n; i++) {
 			if(svc_alarm_match(&(svc_alarms[i]), &td)) {
-				// Make sure metronome is off
-				svc_pulsar_bp_metronome_set_enable(0);
+				svc_pulsar_bp_metronome_set_enable(svc_alarms[i].metronome);
 				svc_melody_play_repeat(
 					svc_alarms[i].melody, svc_melody_alarm_repetitions_get());
 				svc_pulsar_play_repeat(
