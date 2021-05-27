@@ -63,6 +63,8 @@ uint8_t svc_pulsar_bp_bar_state_get(void);
 void svc_pulsar_bp_bar_state_set(uint8_t state);
 uint16_t svc_pulsar_bp_bar_signature_get(void);
 void svc_pulsar_bp_bar_signature_set(uint16_t signature);
+uint8_t svc_pulsar_bp_multishift_get(void);
+void svc_pulsar_bp_multishift_set(uint8_t multishift);
 uint16_t svc_pulsar_bp_bar_freq_get(void);
 void svc_pulsar_bp_bar_freq_set(uint16_t freq);
 uint8_t svc_pulsar_bp_bar_dur_get(void);

@@ -267,6 +267,27 @@ static const svc_menu_item_adj_t menu_item_bp_signature = {
 };
 
 
+static int32_t bp_multiply_get(void *ud) {
+	uint8_t multi = (1 << svc_pulsar_bp_multishift_get());
+    return multi;
+}
+
+static void bp_multiply_set(uint8_t dig, int8_t dir, void *user_data) {
+	uint8_t shift = svc_pulsar_bp_multishift_get();
+	shift = CLAMP(shift + dir, 0, 3);
+	svc_pulsar_bp_multishift_set(shift);
+}
+
+static const svc_menu_item_adj_t menu_item_bp_multiply = {
+	.type = SVC_MENU_ITEM_T_ADJ,
+	.header = "bt",
+	.text = " mul",
+	.digits = 1,
+	.handler_get = bp_multiply_get,
+	.handler_set = bp_multiply_set
+};
+
+
 static const svc_menu_item_unknown_t *menu_items[] = {
 	(void*)&menu_item_start_stop,
 	(void*)&menu_item_hbpm,
@@ -278,6 +299,7 @@ static const svc_menu_item_unknown_t *menu_items[] = {
 	(void*)&menu_item_bp_bar_freq,
 	(void*)&menu_item_bp_bar_dur,
 	(void*)&menu_item_bp_signature,
+	(void*)&menu_item_bp_multiply,
 };
 
 static const svc_menu_t menu = {

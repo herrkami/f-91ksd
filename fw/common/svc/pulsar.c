@@ -32,6 +32,7 @@ static uint16_t SECTION_INFOMEM bp_bar_signature = 4;
 static uint16_t SECTION_INFOMEM bp_bar_freq = 9000;
 static uint8_t SECTION_INFOMEM bp_bar_dur = 4;
 static uint8_t SECTION_INFOMEM bp_metronome_en = 0;
+static uint8_t SECTION_INFOMEM bp_beat_multishift = 0;
 static uint8_t bp_bar_cnt = 0;
 static uint64_t bp_phinext = 0;
 
@@ -127,7 +128,7 @@ void svc_aux_timer_pulsar_pulse_handler(void) {
                         // bp_bar_cnt++;
                     }
                 }
-                bp_phinext += SVC_PULSAR_PHI_MAX;
+                bp_phinext += (SVC_PULSAR_PHI_MAX >> bp_beat_multishift);
             }
             if (pulsar_phi >= SVC_PULSAR_PHI_MAX) {
                 pulsar_phi -= SVC_PULSAR_PHI_MAX;
@@ -353,6 +354,14 @@ uint16_t svc_pulsar_bp_bar_signature_get(void) {
 
 void svc_pulsar_bp_bar_signature_set(uint16_t signature) {
     bp_bar_signature = signature;
+}
+
+uint8_t svc_pulsar_bp_multishift_get(void) {
+    return bp_beat_multishift;
+}
+
+void svc_pulsar_bp_multishift_set(uint8_t multishift) {
+    bp_beat_multishift = multishift;
 }
 
 uint16_t svc_pulsar_bp_bar_freq_get(void) {
