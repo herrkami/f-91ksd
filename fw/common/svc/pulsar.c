@@ -117,15 +117,26 @@ void svc_aux_timer_pulsar_pulse_handler(void) {
             if(pulsar_phi >= bp_phinext) {
                 if(bp_metronome_en) {
                     // Metronome beep
-                    if(bp_beat_state) {
-                        svc_beep_timed(bp_beat_freq, bp_beat_dur);
-                    }
-                    if(bp_bar_state) {
-                        if(++bp_bar_cnt >= bp_bar_signature) {
+                    // if(bp_bar_state) {
+                    //     if(++bp_bar_cnt >= bp_bar_signature) {
+                    //         svc_beep_timed(bp_bar_freq, bp_bar_dur);
+                    //         bp_bar_cnt = 0;
+                    //     }
+                    // }
+                    // if(bp_beat_state) {
+                    //     svc_beep_timed(bp_beat_freq, bp_beat_dur);
+                    // }
+                    if(++bp_bar_cnt >= bp_bar_signature) {
+                        if(bp_bar_state) {
                             svc_beep_timed(bp_bar_freq, bp_bar_dur);
-                            bp_bar_cnt = 0;
                         }
-                        // bp_bar_cnt++;
+                        else {
+                            svc_beep_timed(bp_beat_freq, bp_beat_dur);
+                        }
+                        bp_bar_cnt = 0;
+                    }
+                    else if (bp_beat_state) {
+                        svc_beep_timed(bp_beat_freq, bp_beat_dur);
                     }
                 }
                 bp_phinext += (SVC_PULSAR_PHI_MAX >> bp_beat_multishift);
