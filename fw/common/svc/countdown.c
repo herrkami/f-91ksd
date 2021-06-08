@@ -20,7 +20,7 @@ static svc_countdown_priv_t SECTION_INFOMEM svc_countdowns[SVC_COUNTDOWN_NR];
 
 static uint8_t countdown_pending = NO_COUNTDOWN_PENDING;
 
-static uint8_t countdowns_running = 0;
+static uint16_t countdowns_running = 0;
 
 const uint8_t svc_countdowns_n = SVC_COUNTDOWN_NR;
 
