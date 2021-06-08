@@ -6,19 +6,20 @@
 #include "common/hal/lcd_segments.h"
 #include <string.h>
 #include "platform.h"
-#define N_ALARMS 10
+#define N_ALARMS 11
 
 static svc_alarm_t SECTION_INFOMEM svc_alarms[N_ALARMS] = {
-	{.h=8, .m=15, .days=SVC_WEEKDAY_MO, .enable=1, .pulsar=0, .melody=10},
-	{.h=11, .m=02, .days=SVC_WEEKDAY_TH, .enable=1, .pulsar=0, .melody=10},
-	{.h=0, .m=0, .days=0xff, .enable=0},
-	{.h=0, .m=0, .days=0xff, .enable=0},
-	{.h=0, .m=0, .days=0xff, .enable=0},
-	{.h=0, .m=0, .days=0xff, .enable=0},
-	{.h=0, .m=0, .days=0xff, .enable=0},
-	{.h=0, .m=0, .days=0xff, .enable=0},
-	{.h=0, .m=0, .days=0xff, .enable=0},
-	{.h=0, .m=0, .days=0xff, .enable=0},
+	{.h=8, .m=15, .days=SVC_WEEKDAY_MO, .enable=0, .pulsar=0, .melody=10},
+	{.h=11, .m=02, .days=SVC_WEEKDAY_TH, .enable=0, .pulsar=0, .melody=10},
+	{.h=6, .m=0, .days=0xff, .enable=0},
+	{.h=7, .m=0, .days=0xff, .enable=0},
+	{.h=8, .m=0, .days=0xff, .enable=0},
+	{.h=9, .m=0, .days=0xff, .enable=0},
+	{.h=10, .m=0, .days=0xff, .enable=0},
+	{.h=11, .m=0, .days=0xff, .enable=0},
+	{.h=12, .m=0, .days=0xff, .enable=0},
+	{.h=13, .m=0, .days=0xff, .enable=0},
+	{.h=14, .m=0, .days=0xff, .enable=0},
 
 };
 const uint8_t svc_alarms_n = N_ALARMS;
