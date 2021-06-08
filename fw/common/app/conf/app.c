@@ -366,6 +366,10 @@ static void melody_default_draw(svc_menu_state_t *state, svc_menu_item_unknown_t
 	svc_lcd_puti(6, 2, svc_default_melody_get());
 }
 
+static void melody_play(uint8_t choice, void *ud) {
+	svc_melody_play(choice);
+}
+
 static svc_menu_item_choice_t menu_item_default_melody = {
 	.type = SVC_MENU_ITEM_T_CHOICE,
 	.text = " mel",
@@ -374,6 +378,7 @@ static svc_menu_item_choice_t menu_item_default_melody = {
 	.choices = {""},
 	.handler_set = melody_default_set,
 	.handler_get = melody_default_get,
+	.handler_special = melody_play,
 	.handler_draw = melody_default_draw
 };
 
