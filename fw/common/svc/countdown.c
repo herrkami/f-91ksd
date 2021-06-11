@@ -35,11 +35,11 @@ void svc_countdown_init(void) {
 	svc_countdown_set_time(2, 0, 3, 0);
 	svc_countdown_set_time(3, 0, 5, 0);
 	svc_countdown_set_time(4, 0, 10, 0);
-	svc_countdown_set_time(5, 0, 20, 0);
-	svc_countdown_set_time(6, 0, 30, 0);
-	svc_countdown_set_time(7, 0, 45, 0);
-	svc_countdown_set_time(8, 1, 0, 0);
-	svc_countdown_set_time(9, 1, 30, 0);
+	svc_countdown_set_time(5, 0, 15, 0);
+	svc_countdown_set_time(6, 0, 20, 0);
+	svc_countdown_set_time(7, 0, 30, 0);
+	svc_countdown_set_time(8, 0, 40, 0);
+	svc_countdown_set_time(9, 1, 0, 0);
 	svc_countdown_set_time(10, 2, 0, 0);
 }
 
