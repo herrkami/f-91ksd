@@ -3,7 +3,7 @@
 F-91KSD is a functional and optical modification of the Casio® F-91W.
 
 **Hardware and firmware are heavily based on the brilliant
-[pluto](https://github.com/carrotIndustries/pluto) project!**
+[pluto](https://github.com/carrotIndustries/pluto) project.**
 
 
 ## Features
