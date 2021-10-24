@@ -155,6 +155,11 @@ void hal_aux_timer_set(uint8_t running) {
 	aux_timer_run = running;
 }
 
+uint16_t hal_adc_sample_battery(void) {
+	// return (uint16_t)(3.0/2/2.0*0xFFF);
+	return 0;
+}
+
 static void *aux_timer_thread(void *arg) {
 	void *sock = zmq_socket(ctx, ZMQ_PUSH);
 	zmq_connect(sock, "ipc://aswemu-out");

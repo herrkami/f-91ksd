@@ -46,7 +46,10 @@ void hal_rtc_reset_second(void);
 void hal_rtc_set_date(hal_rtc_timedate_t *date);
 void hal_rtc_cal_set(int16_t cal);
 int16_t hal_rtc_cal_get(void);
+
 void hal_aux_timer_set(uint8_t running);
+
+uint16_t hal_adc_sample_battery(void);
 //
 // typedef struct {
 // 	int16_t x;

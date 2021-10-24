@@ -5,6 +5,7 @@ SRC += ../common/svc/lcd.c \
        ../common/svc/aux_timer.c \
 	   ../common/svc/leds.c \
 	   ../common/svc/pulsar.c \
+	   ../common/svc/battery.c \
        ../common/svc/beep.c \
        ../common/svc/melody.c \
        ../common/svc/chro.c \

@@ -2,9 +2,10 @@ SMAPS_C = hal/segmap.c
 GEN_SMAP = hal/gen_map.py
 
 SRC += hal/lcd.c \
-       hal/wdt.c \
+	   hal/wdt.c \
        hal/io.c \
        hal/rtc.c \
+	   hal/adc.c \
        hal/button.c \
        hal/beepled.c \
        hal/aux_timer.c \

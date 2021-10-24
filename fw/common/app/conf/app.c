@@ -442,7 +442,21 @@ static const svc_menu_item_text_t menu_item_debug = {
 };
 
 
+/* battery *******************************************************************/
+static void battery_enter(void *ud) {
+	app_set_view(app_current, 2);
+}
+
+static const svc_menu_item_text_t menu_item_battery = {
+	.type = SVC_MENU_ITEM_T_TEXT,
+	.text = "bat",
+	.handler = battery_enter
+};
+
+
 static const svc_menu_item_text_t *menu_items[] = {
+	(void*)&menu_item_battery,
+
 	(void*)&menu_item_beep_enable,
 
 	(void*)&menu_item_keybeep,
@@ -492,6 +506,9 @@ static app_view_t views[] = {
 	},
 	{
 		.main = app_app_conf_debug_main,
+	},
+	{
+		.main = app_app_battery_main,
 	}
 };
 

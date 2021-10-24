@@ -4,6 +4,7 @@
 #include "lcd.h"
 #include "main.h"
 #include "menu.h"
+#include "battery.h"
 #include "leds.h"
 #include "pulsar.h"
 #include "beep.h"
