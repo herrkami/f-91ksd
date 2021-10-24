@@ -1,6 +1,6 @@
-#F-91KSD Firmware
+# F-91KSD Firmware
 The F-91KSD firmware is based on the [pluto firmware](https://github.com/carrotIndustries/pluto-fw).
-Even the following README is partially borrowed.
+It has been forked from its [May 11, 2018 commit state](https://github.com/carrotIndustries/pluto-fw/commit/a3063225761d98f1a0111b59fe00d9e4cfaac7c2).
 
 ## Assisted calibration
 Aside from being a cool nerd gadget pluto's main purpose is accurately
