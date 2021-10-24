@@ -29,6 +29,9 @@ F-91KSD is a functional and optical modification of the Casio® F-91W.
 - BPM measurement and optical/acoustical metronome
 - Some minor bug fixes
 
+## In progress
+Battery monitoring isn't functional yet. 
+
 # Credits
 Without previous work by [carrotIndustries](https://github.com/carrotIndustries/) and [sh-ow](https://github.com/sh-ow) this project wouldn't exist.
 Most of the software components are their work.
